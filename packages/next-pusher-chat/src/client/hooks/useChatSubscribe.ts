@@ -29,32 +29,41 @@ export const getOrCreateSubscription = (conversationId: string, pusher: any, use
       onMessageReceived: (message) => {
         const subscription = pusherSubscriptions.get(conversationId);
         if (subscription) {
-          subscription.callbacks.forEach((callback) => {
-            callback.onMessageReceived?.(message);
+          // Utiliser Array.from pour créer une copie du Set et éviter les problèmes de mutation
+          Array.from(subscription.callbacks).forEach((callback) => {
+            if (callback.onMessageReceived) {
+              callback.onMessageReceived(message);
+            }
           });
         }
       },
       onMessageSeen: (messageSeen) => {
         const subscription = pusherSubscriptions.get(conversationId);
         if (subscription) {
-          subscription.callbacks.forEach((callback) => {
-            callback.onMessageSeen?.(messageSeen);
+          Array.from(subscription.callbacks).forEach((callback) => {
+            if (callback.onMessageSeen) {
+              callback.onMessageSeen(messageSeen);
+            }
           });
         }
       },
       onTypingStatus: (typingStatus) => {
         const subscription = pusherSubscriptions.get(conversationId);
         if (subscription) {
-          subscription.callbacks.forEach((callback) => {
-            callback.onTypingStatus?.(typingStatus);
+          Array.from(subscription.callbacks).forEach((callback) => {
+            if (callback.onTypingStatus) {
+              callback.onTypingStatus(typingStatus);
+            }
           });
         }
       },
       onError: (error) => {
         const subscription = pusherSubscriptions.get(conversationId);
         if (subscription) {
-          subscription.callbacks.forEach((callback) => {
-            callback.onError?.(error);
+          Array.from(subscription.callbacks).forEach((callback) => {
+            if (callback.onError) {
+              callback.onError(error);
+            }
           });
         }
       },
@@ -77,24 +86,15 @@ export const useChatSubscribe = ({
   onError,
 }: UseChatSubscribeProps) => {
   const { pusher, isConnected, userId } = useNextPusherChat();
-  const callbacksRef = useRef<UseChatSubscribeProps>({
+  
+  // Créer un objet stable pour les callbacks
+  const callbacks = useCallback(() => ({
     conversationId,
     onMessageReceived,
     onMessageSeen,
     onTypingStatus,
     onError,
-  });
-
-  // Mettre à jour les callbacks si nécessaire
-  useEffect(() => {
-    callbacksRef.current = {
-      conversationId,
-      onMessageReceived,
-      onMessageSeen,
-      onTypingStatus,
-      onError,
-    };
-  }, [conversationId, onMessageReceived, onMessageSeen, onTypingStatus, onError]);
+  }), [conversationId, onMessageReceived, onMessageSeen, onTypingStatus, onError]);
 
   // Gérer l'abonnement/désabonnement
   useEffect(() => {
@@ -102,7 +102,10 @@ export const useChatSubscribe = ({
 
     // Obtenir ou créer la souscription
     const subscription = getOrCreateSubscription(conversationId, pusher, userId);
-    subscription.callbacks.add(callbacksRef.current);
+    const currentCallbacks = callbacks();
+    
+    // Ajouter les callbacks actuels
+    subscription.callbacks.add(currentCallbacks);
 
     logger.info(`🔄 [ChatSubscribe] Ajout des callbacks pour la conversation ${conversationId}`);
 
@@ -110,7 +113,7 @@ export const useChatSubscribe = ({
     return () => {
       const subscription = pusherSubscriptions.get(conversationId);
       if (subscription) {
-        subscription.callbacks.delete(callbacksRef.current);
+        subscription.callbacks.delete(currentCallbacks);
         if (subscription.callbacks.size === 0) {
           subscription.unsubscribe();
           pusherSubscriptions.delete(conversationId);
@@ -119,7 +122,7 @@ export const useChatSubscribe = ({
       }
       logger.info(`🔄 [ChatSubscribe] Suppression des callbacks pour la conversation ${conversationId}`);
     };
-  }, [isConnected, conversationId, pusher, userId]);
+  }, [isConnected, conversationId, pusher, userId, callbacks]);
 
   return {
     isConnected,
