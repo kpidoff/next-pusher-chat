@@ -1,0 +1,45 @@
+{
+  "name": "test-app-14",
+  "version": "0.0.7",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf .next",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:seed": "npx ts-node prisma/seed.ts",
+    "prisma:studio": "prisma studio"
+  },
+  "prisma": {
+    "seed": "node --loader ts-node/esm prisma/seed.ts"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^7.1.0",
+    "@mui/lab": "7.0.0-beta.12",
+    "@mui/material": "^7.1.0",
+    "@next-pusher-chat/core": "workspace:*",
+    "@prisma/client": "^5.10.0",
+    "@tanstack/react-query": "4.36.1",
+    "@types/lodash": "^4.17.16",
+    "lodash": "^4.17.21",
+    "moment": "^2.30.1",
+    "next": "^14.2.3",
+    "pusher": "^5.2.0",
+    "pusher-js": "^8.4.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "prisma": "^5.10.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.0.0"
+  }
+}

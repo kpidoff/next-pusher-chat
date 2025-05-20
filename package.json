@@ -1,0 +1,29 @@
+{
+  "name": "next-pusher-chat",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "clean": "turbo run clean",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "install:all": "pnpm install && pnpm -r install",
+    "dev:all": "pnpm build:packages && turbo run dev --filter=./packages/*",
+    "build:all": "turbo run build",
+    "build:packages": "turbo run build --filter=./packages/*",
+    "clean:all": "turbo run clean && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.2",
+    "prettier": "^3.2.5"
+  },
+  "packageManager": "pnpm@8.15.4",
+  "version": "0.0.3",
+  "dependencies": {
+    "@next-pusher-chat/core": "workspace:*"
+  }
+}
