@@ -42,7 +42,9 @@ export const SeenBy: React.FC<SeenByProps> = ({
           variant="caption"
           sx={{ display: "block" }}
         >
-          {participant.name} - {moment(participant.seenAt).format("HH:mm")}
+          {participant.name} - {moment(participant.seenAt).isBefore(moment().subtract(1, 'day'))
+            ? moment(participant.seenAt).format("DD/MM/YYYY HH:mm")
+            : moment(participant.seenAt).format("HH:mm")}
         </Typography>
       ))}
     </Box>

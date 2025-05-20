@@ -268,7 +268,7 @@ var eventMessageSeenEvent = async (conversationId, data) => {
 };
 
 // src/client/hooks/useChatSubscribe.ts
-import { useEffect as useEffect2, useRef } from "react";
+import { useCallback, useEffect as useEffect2 } from "react";
 
 // src/client/services/chat/subscribe.ts
 var processedEventIds = /* @__PURE__ */ new Set();
@@ -440,36 +440,40 @@ var getOrCreateSubscription = (conversationId, pusher3, userId) => {
       onMessageReceived: (message) => {
         const subscription = pusherSubscriptions.get(conversationId);
         if (subscription) {
-          subscription.callbacks.forEach((callback) => {
-            var _a;
-            (_a = callback.onMessageReceived) == null ? void 0 : _a.call(callback, message);
+          Array.from(subscription.callbacks).forEach((callback) => {
+            if (callback.onMessageReceived) {
+              callback.onMessageReceived(message);
+            }
           });
         }
       },
       onMessageSeen: (messageSeen) => {
         const subscription = pusherSubscriptions.get(conversationId);
         if (subscription) {
-          subscription.callbacks.forEach((callback) => {
-            var _a;
-            (_a = callback.onMessageSeen) == null ? void 0 : _a.call(callback, messageSeen);
+          Array.from(subscription.callbacks).forEach((callback) => {
+            if (callback.onMessageSeen) {
+              callback.onMessageSeen(messageSeen);
+            }
           });
         }
       },
       onTypingStatus: (typingStatus) => {
         const subscription = pusherSubscriptions.get(conversationId);
         if (subscription) {
-          subscription.callbacks.forEach((callback) => {
-            var _a;
-            (_a = callback.onTypingStatus) == null ? void 0 : _a.call(callback, typingStatus);
+          Array.from(subscription.callbacks).forEach((callback) => {
+            if (callback.onTypingStatus) {
+              callback.onTypingStatus(typingStatus);
+            }
           });
         }
       },
       onError: (error) => {
         const subscription = pusherSubscriptions.get(conversationId);
         if (subscription) {
-          subscription.callbacks.forEach((callback) => {
-            var _a;
-            (_a = callback.onError) == null ? void 0 : _a.call(callback, error);
+          Array.from(subscription.callbacks).forEach((callback) => {
+            if (callback.onError) {
+              callback.onError(error);
+            }
           });
         }
       }
@@ -490,31 +494,23 @@ var useChatSubscribe = ({
   onError
 }) => {
   const { pusher: pusher3, isConnected, userId } = useNextPusherChat();
-  const callbacksRef = useRef({
+  const callbacks = useCallback(() => ({
     conversationId,
     onMessageReceived,
     onMessageSeen,
     onTypingStatus,
     onError
-  });
-  useEffect2(() => {
-    callbacksRef.current = {
-      conversationId,
-      onMessageReceived,
-      onMessageSeen,
-      onTypingStatus,
-      onError
-    };
-  }, [conversationId, onMessageReceived, onMessageSeen, onTypingStatus, onError]);
+  }), [conversationId, onMessageReceived, onMessageSeen, onTypingStatus, onError]);
   useEffect2(() => {
     if (!isConnected || !pusher3) return;
     const subscription = getOrCreateSubscription(conversationId, pusher3, userId);
-    subscription.callbacks.add(callbacksRef.current);
+    const currentCallbacks = callbacks();
+    subscription.callbacks.add(currentCallbacks);
     logger.info(`\u{1F504} [ChatSubscribe] Ajout des callbacks pour la conversation ${conversationId}`);
     return () => {
       const subscription2 = pusherSubscriptions.get(conversationId);
       if (subscription2) {
-        subscription2.callbacks.delete(callbacksRef.current);
+        subscription2.callbacks.delete(currentCallbacks);
         if (subscription2.callbacks.size === 0) {
           subscription2.unsubscribe();
           pusherSubscriptions.delete(conversationId);
@@ -523,7 +519,7 @@ var useChatSubscribe = ({
       }
       logger.info(`\u{1F504} [ChatSubscribe] Suppression des callbacks pour la conversation ${conversationId}`);
     };
-  }, [isConnected, conversationId, pusher3, userId]);
+  }, [isConnected, conversationId, pusher3, userId, callbacks]);
   return {
     isConnected
   };
@@ -2236,7 +2232,7 @@ var SeenBy = ({
       children: [
         participant.name,
         " - ",
-        moment(participant.seenAt).format("HH:mm")
+        moment(participant.seenAt).isBefore(moment().subtract(1, "day")) ? moment(participant.seenAt).format("DD/MM/YYYY HH:mm") : moment(participant.seenAt).format("HH:mm")
       ]
     },
     participant.id
@@ -2413,7 +2409,7 @@ var MessageList = () => {
                     alignSelf: isCurrentUser ? "flex-end" : "flex-start"
                   },
                   children: [
-                    /* @__PURE__ */ jsx18("span", { children: moment2(new Date(message.createdAt)).format("HH:mm") }),
+                    /* @__PURE__ */ jsx18("span", { children: moment2(new Date(message.createdAt)).isBefore(moment2().subtract(1, "day")) ? moment2(new Date(message.createdAt)).format("DD/MM/YYYY HH:mm") : moment2(new Date(message.createdAt)).format("HH:mm") }),
                     isCurrentUser && /* @__PURE__ */ jsx18(
                       SeenBy,
                       {

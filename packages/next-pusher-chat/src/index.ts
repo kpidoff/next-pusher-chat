@@ -1,7 +1,7 @@
 // Client exports
 export * from './client/hooks/useChat';
 export * from './client/hooks/useChatSubscribe';
-export * from './client/providers/NextPusherChatProvider';
+export { NextPusherChatProvider, useNextPusherChat } from './client/providers/NextPusherChatProvider';
 export * from './client/types/chat';
 
 // Components exports

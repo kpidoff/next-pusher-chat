@@ -165,7 +165,9 @@ export const MessageList = () => {
                     }}
                   >
                     <span>
-                      {moment(new Date(message.createdAt)).format("HH:mm")}
+                      {moment(new Date(message.createdAt)).isBefore(moment().subtract(1, 'day'))
+                        ? moment(new Date(message.createdAt)).format("DD/MM/YYYY HH:mm")
+                        : moment(new Date(message.createdAt)).format("HH:mm")}
                     </span>
                     {isCurrentUser && (
                       <SeenBy
