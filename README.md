@@ -6,7 +6,7 @@ Une bibliothèque React moderne pour intégrer facilement des fonctionnalités d
 
 - Intégration simple avec Next.js
 - Support du chat en temps réel via Pusher
-- Interface utilisateur moderne et personnalisable
+- Interface utilisateur moderne avec Material-UI
 - Support TypeScript
 - Gestion des messages, des utilisateurs et des salons
 - Composants React optimisés pour les performances
@@ -41,107 +41,152 @@ PUSHER_APP_SECRET=votre_app_secret
 
 ```tsx
 // app/providers.tsx
-import { PusherProvider } from '@next-pusher-chat/core';
+"use client";
+
+import { NextPusherChatProvider } from "@next-pusher-chat/core";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <PusherProvider
+    <NextPusherChatProvider
       appKey={process.env.NEXT_PUBLIC_PUSHER_APP_KEY!}
       cluster={process.env.NEXT_PUBLIC_PUSHER_CLUSTER!}
     >
       {children}
-    </PusherProvider>
+    </NextPusherChatProvider>
   );
 }
 ```
 
 ## 💻 Utilisation
 
-### Composant de Chat
+### Exemple d'Intégration
 
 ```tsx
-import { Chat } from '@next-pusher-chat/core';
+// app/page.tsx
+"use client";
 
-export default function ChatPage() {
+import { Box, Paper, Typography } from "@mui/material";
+import { useNextPusherChat } from "@next-pusher-chat/core";
+import Bubble from "./components/Bubble";
+
+export default function Home() {
+  const { isConnected, isLoading, error, connectionState } = useNextPusherChat();
+
   return (
-    <Chat
-      channel="my-channel"
-      user={{
-        id: "user-123",
-        name: "John Doe",
-        avatar: "https://example.com/avatar.jpg"
+    <Box sx={{ minHeight: "100vh", p: 4, bgcolor: "background.default" }}>
+      <Paper elevation={3} sx={{ p: 4, maxWidth: 800, mx: "auto", mt: 4, borderRadius: 2 }}>
+        <Typography variant="h4" component="h1" align="center" gutterBottom>
+          Next Pusher Chat Demo
+        </Typography>
+        
+        <Bubble conversationId="conv-123" />
+      </Paper>
+    </Box>
+  );
+}
+
+// app/components/Bubble.tsx
+"use client";
+
+import { ChatBubble } from "@next-pusher-chat/core";
+import { Button } from "@mui/material";
+import { useState, useEffect } from "react";
+
+export default function Bubble({ conversationId }: { conversationId?: string | null }) {
+  const [messages, setMessages] = useState([]);
+  const [participants, setParticipants] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [attachments, setAttachments] = useState([]);
+  const [totalMessages, setTotalMessages] = useState(0);
+
+  useEffect(() => {
+    const loadData = async () => {
+      if (!conversationId) return;
+      
+      // Charger les données initiales
+      const [participantsData, messagesData, attachmentsData, total] = await Promise.all([
+        getParticipants(conversationId),
+        getMessages(conversationId),
+        getAttachments(conversationId),
+        getTotalMessages(conversationId)
+      ]);
+
+      setParticipants(participantsData);
+      setMessages(messagesData);
+      setAttachments(attachmentsData);
+      setTotalMessages(total);
+      setIsLoading(false);
+    };
+
+    loadData();
+  }, [conversationId]);
+
+  return (
+    <ChatBubble
+      totalMessages={totalMessages}
+      allAttachments={attachments}
+      participants={participants}
+      isLoading={isLoading}
+      defaultMessages={messages}
+      conversationId={conversationId}
+      buttonJoin={
+        <Button fullWidth variant="contained" color="primary">
+          Rejoindre la conversation
+        </Button>
+      }
+      onReceiveMessage={async (eventId, message) => {
+        if (message.attachmentsCount > 0) {
+          const messageFromDb = await getMessageByEventId(eventId);
+          if (messageFromDb) {
+            return {
+              ...message,
+              content: messageFromDb.content,
+              attachments: messageFromDb.attachments,
+            };
+          }
+        }
+        return message;
+      }}
+      onSendMessage={async ({ eventId, message, conversationId }) => {
+        await sendMessage({
+          content: message.content,
+          userId: message.userId,
+          conversationId,
+          eventId,
+          attachments: message.attachments,
+        });
+        return message;
+      }}
+      onMessageSeen={async ({ lastMessage, conversationId, userId }) => {
+        if (!lastMessage) return;
+        await markAllMessagesAsSeen(conversationId, userId);
+      }}
+      onLoadMoreMessages={async ({ oldestMessageId }) => {
+        if (!conversationId) return [];
+        return await getMessages(conversationId, oldestMessageId);
       }}
     />
   );
 }
 ```
 
-### Hook personnalisé
-
-```tsx
-import { usePusherChat } from '@next-pusher-chat/core';
-
-function MyCustomChat() {
-  const { messages, sendMessage, isConnected } = usePusherChat({
-    channel: "my-channel",
-    user: {
-      id: "user-123",
-      name: "John Doe"
-    }
-  });
-
-  return (
-    <div>
-      {messages.map((message) => (
-        <div key={message.id}>{message.content}</div>
-      ))}
-      <button onClick={() => sendMessage("Hello!")}>Envoyer</button>
-    </div>
-  );
-}
-```
-
 ## 📚 API Reference
 
-### Props du Provider
+### ChatBubble Props
 
 | Prop | Type | Description |
 |------|------|-------------|
-| appKey | string | Clé d'application Pusher |
-| cluster | string | Cluster Pusher |
-| options | PusherOptions | Options supplémentaires pour la configuration Pusher |
-
-### Props du Composant Chat
-
-| Prop | Type | Description |
-|------|------|-------------|
-| channel | string | Nom du canal Pusher |
-| user | User | Informations de l'utilisateur |
-| theme | Theme | Thème personnalisé (optionnel) |
-| onMessage | (message: Message) => void | Callback pour les nouveaux messages |
-
-## 🎨 Personnalisation
-
-La bibliothèque offre plusieurs options de personnalisation :
-
-```tsx
-import { Chat, Theme } from '@next-pusher-chat/core';
-
-const customTheme: Theme = {
-  colors: {
-    primary: '#007bff',
-    background: '#ffffff',
-    text: '#000000'
-  },
-  // ... autres options de thème
-};
-
-<Chat
-  channel="my-channel"
-  user={user}
-  theme={customTheme}
-/>
-```
+| conversationId | string \| null | ID de la conversation |
+| participants | User[] | Liste des participants |
+| defaultMessages | Message[] | Messages initiaux |
+| isLoading | boolean | État de chargement |
+| allAttachments | Attachment[] | Pièces jointes disponibles |
+| totalMessages | number | Nombre total de messages |
+| buttonJoin | ReactNode | Bouton personnalisé pour rejoindre |
+| onReceiveMessage | (eventId, message) => Promise<Message> | Gestion des messages reçus |
+| onSendMessage | (params) => Promise<Message> | Gestion de l'envoi de messages |
+| onMessageSeen | (params) => Promise<void> | Gestion des messages vus |
+| onLoadMoreMessages | (params) => Promise<Message[]> | Chargement de messages plus anciens |
 
 ## 🤝 Contribution
 
