@@ -1,3 +1,4 @@
+"use client";
 import "moment/locale/fr";
 
 import { Box, CircularProgress, Typography } from "@mui/material";

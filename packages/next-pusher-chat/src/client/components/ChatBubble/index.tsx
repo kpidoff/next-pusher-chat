@@ -1,3 +1,4 @@
+"use client";
 import { Attachment, ChatProps, User } from "../../types/chat";
 import React, { useState } from "react";
 

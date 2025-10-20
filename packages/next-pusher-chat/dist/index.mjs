@@ -994,81 +994,15 @@ var WaitingMessageText = styled(Box)(({ theme }) => ({
   lineHeight: 1.5
 }));
 
-// src/client/components/Chat/components/ChatActions/style.ts
+// src/client/components/Chat/components/LoadMoreMessages/style.ts
 import { Box as Box2, Button } from "@mui/material";
 import { styled as styled2 } from "@mui/material/styles";
-var ActionsContainer = styled2(Box2)(({ theme }) => ({
-  position: "relative",
-  display: "flex",
-  flexDirection: "column",
-  gap: theme.spacing(1),
-  zIndex: 1
-}));
-var ScrollButton = styled2(Button)(({ theme }) => ({
-  position: "absolute",
-  bottom: theme.spacing(2),
-  right: theme.spacing(2),
-  backgroundColor: theme.palette.primary.main,
-  color: theme.palette.primary.contrastText,
-  "&:hover": {
-    backgroundColor: theme.palette.primary.dark
-  },
-  boxShadow: theme.shadows[2],
-  width: "40px",
-  height: "40px",
-  minWidth: "40px",
-  padding: 0,
-  borderRadius: "50%",
-  backdropFilter: "blur(8px)",
-  border: `1px solid ${theme.palette.primary.dark}33`,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center"
-}));
-
-// src/client/components/Chat/components/ChatActions/index.tsx
-import { useEffect as useEffect5, useState as useState2 } from "react";
-import { Fade } from "@mui/material";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { jsx as jsx3 } from "react/jsx-runtime";
-var ChatActions = () => {
-  const { scrollManager } = useChatContext();
-  const { scrollToBottom, isAtBottom } = scrollManager;
-  const [showButton, setShowButton] = useState2(false);
-  useEffect5(() => {
-    let timeoutId;
-    if (!isAtBottom) {
-      timeoutId = setTimeout(() => {
-        setShowButton(true);
-      }, 500);
-    } else {
-      timeoutId = setTimeout(() => {
-        setShowButton(false);
-      }, 100);
-    }
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [isAtBottom]);
-  return /* @__PURE__ */ jsx3(ActionsContainer, { children: /* @__PURE__ */ jsx3(Fade, { in: showButton, children: /* @__PURE__ */ jsx3(
-    ScrollButton,
-    {
-      onClick: () => scrollToBottom("smooth"),
-      variant: "contained",
-      children: /* @__PURE__ */ jsx3(KeyboardArrowDownIcon, {})
-    }
-  ) }) });
-};
-
-// src/client/components/Chat/components/LoadMoreMessages/style.ts
-import { Box as Box3, Button as Button2 } from "@mui/material";
-import { styled as styled3 } from "@mui/material/styles";
-var LoadMoreContainer = styled3(Box3)(({ theme }) => ({
+var LoadMoreContainer = styled2(Box2)(({ theme }) => ({
   display: "flex",
   justifyContent: "center",
   padding: theme.spacing(2)
 }));
-var LoadMoreButton = styled3(Button2)(({ theme }) => ({
+var LoadMoreButton = styled2(Button)(({ theme }) => ({
   borderRadius: "20px",
   textTransform: "none",
   minWidth: "150px",
@@ -1091,7 +1025,7 @@ var LoadMoreButton = styled3(Button2)(({ theme }) => ({
 import { CircularProgress } from "@mui/material";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useRef as useRef4 } from "react";
-import { jsx as jsx4 } from "react/jsx-runtime";
+import { jsx as jsx3 } from "react/jsx-runtime";
 var LoadMoreMessages = () => {
   const {
     isLoading,
@@ -1123,22 +1057,22 @@ var LoadMoreMessages = () => {
   };
   if (!hasMore || isLoading || totalMessages !== void 0 && currentMessagesCount >= totalMessages)
     return null;
-  return /* @__PURE__ */ jsx4(LoadMoreContainer, { children: /* @__PURE__ */ jsx4(
+  return /* @__PURE__ */ jsx3(LoadMoreContainer, { children: /* @__PURE__ */ jsx3(
     LoadMoreButton,
     {
       variant: "outlined",
       onClick: handleLoadMore,
       disabled: loadingMore,
-      startIcon: loadingMore ? /* @__PURE__ */ jsx4(CircularProgress, { size: 20 }) : /* @__PURE__ */ jsx4(KeyboardArrowUpIcon, {}),
+      startIcon: loadingMore ? /* @__PURE__ */ jsx3(CircularProgress, { size: 20 }) : /* @__PURE__ */ jsx3(KeyboardArrowUpIcon, {}),
       children: loadingMore ? "Chargement..." : "Messages plus anciens"
     }
   ) });
 };
 
 // src/client/components/Chat/components/MessageInput/style.ts
-import { Box as Box4, InputBase } from "@mui/material";
-import { styled as styled4 } from "@mui/material/styles";
-var InputContainer = styled4(Box4)(({ theme }) => ({
+import { Box as Box3, InputBase } from "@mui/material";
+import { styled as styled3 } from "@mui/material/styles";
+var InputContainer = styled3(Box3)(({ theme }) => ({
   padding: theme.spacing(1),
   borderTop: `1px solid ${theme.palette.divider}`,
   background: theme.palette.background.paper,
@@ -1150,7 +1084,7 @@ var InputContainer = styled4(Box4)(({ theme }) => ({
     gap: theme.spacing(1)
   }
 }));
-var StyledInput = styled4(InputBase)(({ theme }) => ({
+var StyledInput = styled3(InputBase)(({ theme }) => ({
   flex: 1,
   padding: theme.spacing(0.5, 1),
   backgroundColor: theme.palette.background.default,
@@ -1165,21 +1099,21 @@ var StyledInput = styled4(InputBase)(({ theme }) => ({
 }));
 
 // src/client/components/Chat/components/MessageInput/index.tsx
-import { useEffect as useEffect6, useRef as useRef7, useState as useState6 } from "react";
-import { Box as Box9 } from "@mui/material";
-import { Button as Button3 } from "@mui/material";
+import { useEffect as useEffect5, useRef as useRef7, useState as useState5 } from "react";
+import { Box as Box8, CircularProgress as CircularProgress3 } from "@mui/material";
+import { Button as Button2 } from "@mui/material";
 
 // src/client/components/Chat/components/EmojiPicker/index.tsx
-import { Box as Box5, IconButton, Popover } from "@mui/material";
+import { Box as Box4, IconButton, Popover } from "@mui/material";
 import EmojiPicker from "emoji-picker-react";
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
-import { useState as useState3 } from "react";
-import { jsx as jsx5, jsxs } from "react/jsx-runtime";
-var EmojiPickerComponent = ({
+import { useState as useState2 } from "react";
+import { jsx as jsx4, jsxs } from "react/jsx-runtime";
+function EmojiPickerComponent({
   onEmojiClick,
   disabled = false
-}) => {
-  const [anchorEl, setAnchorEl] = useState3(null);
+}) {
+  const [anchorEl, setAnchorEl] = useState2(null);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -1191,8 +1125,8 @@ var EmojiPickerComponent = ({
     handleClose();
   };
   const open = Boolean(anchorEl);
-  return /* @__PURE__ */ jsxs(Box5, { children: [
-    /* @__PURE__ */ jsx5(
+  return /* @__PURE__ */ jsxs(Box4, { children: [
+    /* @__PURE__ */ jsx4(
       IconButton,
       {
         disabled,
@@ -1204,10 +1138,10 @@ var EmojiPickerComponent = ({
             color: "primary.main"
           }
         },
-        children: /* @__PURE__ */ jsx5(SentimentSatisfiedAltIcon, {})
+        children: /* @__PURE__ */ jsx4(SentimentSatisfiedAltIcon, {})
       }
     ),
-    /* @__PURE__ */ jsx5(
+    /* @__PURE__ */ jsx4(
       Popover,
       {
         open,
@@ -1221,7 +1155,7 @@ var EmojiPickerComponent = ({
           vertical: "bottom",
           horizontal: "left"
         },
-        children: /* @__PURE__ */ jsx5(
+        children: /* @__PURE__ */ jsx4(
           EmojiPicker,
           {
             onEmojiClick: handleEmojiClick,
@@ -1233,16 +1167,16 @@ var EmojiPickerComponent = ({
       }
     )
   ] });
-};
+}
 var EmojiPicker_default = EmojiPickerComponent;
 
 // src/client/components/Chat/components/FileList/index.tsx
-import { Box as Box6, Chip } from "@mui/material";
-import { jsx as jsx6 } from "react/jsx-runtime";
+import { Box as Box5, Chip } from "@mui/material";
+import { jsx as jsx5 } from "react/jsx-runtime";
 var FileList = ({ attachments, onRemoveFile }) => {
   if (attachments.length === 0) return null;
-  return /* @__PURE__ */ jsx6(
-    Box6,
+  return /* @__PURE__ */ jsx5(
+    Box5,
     {
       sx: {
         display: "flex",
@@ -1252,7 +1186,7 @@ var FileList = ({ attachments, onRemoveFile }) => {
         borderBottom: "1px solid",
         borderColor: "divider"
       },
-      children: attachments.map((attachment, index) => /* @__PURE__ */ jsx6(
+      children: attachments.map((attachment, index) => /* @__PURE__ */ jsx5(
         Chip,
         {
           label: attachment.name,
@@ -1283,15 +1217,15 @@ var FileList = ({ attachments, onRemoveFile }) => {
 var FileList_default = FileList;
 
 // src/client/components/Chat/components/FilePicker/index.tsx
-import { Box as Box7, IconButton as IconButton2 } from "@mui/material";
-import { useRef as useRef5, useState as useState4 } from "react";
+import { Box as Box6, IconButton as IconButton2 } from "@mui/material";
+import { useRef as useRef5, useState as useState3 } from "react";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
-import { jsx as jsx7, jsxs as jsxs2 } from "react/jsx-runtime";
+import { jsx as jsx6, jsxs as jsxs2 } from "react/jsx-runtime";
 function FilePicker({
   onFilesSelect,
   disabled = false
 }) {
-  const [anchorEl, setAnchorEl] = useState4(null);
+  const [anchorEl, setAnchorEl] = useState3(null);
   const fileInputRef = useRef5(null);
   const handleClick = (event) => {
     var _a;
@@ -1309,8 +1243,8 @@ function FilePicker({
     handleClose();
   };
   const open = Boolean(anchorEl);
-  return /* @__PURE__ */ jsxs2(Box7, { children: [
-    /* @__PURE__ */ jsx7(
+  return /* @__PURE__ */ jsxs2(Box6, { children: [
+    /* @__PURE__ */ jsx6(
       "input",
       {
         type: "file",
@@ -1320,7 +1254,7 @@ function FilePicker({
         style: { display: "none" }
       }
     ),
-    /* @__PURE__ */ jsx7(
+    /* @__PURE__ */ jsx6(
       IconButton2,
       {
         onClick: handleClick,
@@ -1332,7 +1266,7 @@ function FilePicker({
           }
         },
         disabled,
-        children: /* @__PURE__ */ jsx7(AttachFileIcon, {})
+        children: /* @__PURE__ */ jsx6(AttachFileIcon, {})
       }
     )
   ] });
@@ -1342,17 +1276,17 @@ function FilePicker({
 import SendIcon from "@mui/icons-material/Send";
 
 // src/client/components/Chat/components/VoiceRecorder/index.tsx
-import { Box as Box8, CircularProgress as CircularProgress2, IconButton as IconButton3 } from "@mui/material";
-import { useRef as useRef6, useState as useState5 } from "react";
+import { Box as Box7, CircularProgress as CircularProgress2, IconButton as IconButton3 } from "@mui/material";
+import { useRef as useRef6, useState as useState4 } from "react";
 import MicIcon from "@mui/icons-material/Mic";
 import StopIcon from "@mui/icons-material/Stop";
-import { jsx as jsx8, jsxs as jsxs3 } from "react/jsx-runtime";
+import { jsx as jsx7, jsxs as jsxs3 } from "react/jsx-runtime";
 function VoiceRecorder({
   onRecordingComplete,
   disabled = false
 }) {
-  const [isRecording, setIsRecording] = useState5(false);
-  const [recordingTime, setRecordingTime] = useState5(0);
+  const [isRecording, setIsRecording] = useState4(false);
+  const [recordingTime, setRecordingTime] = useState4(0);
   const mediaRecorderRef = useRef6(null);
   const timerRef = useRef6();
   const audioChunksRef = useRef6([]);
@@ -1398,8 +1332,8 @@ function VoiceRecorder({
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, "0")}`;
   };
-  return /* @__PURE__ */ jsxs3(Box8, { sx: { display: "flex", alignItems: "center", gap: 1 }, children: [
-    /* @__PURE__ */ jsx8(
+  return /* @__PURE__ */ jsxs3(Box7, { sx: { display: "flex", alignItems: "center", gap: 1 }, children: [
+    /* @__PURE__ */ jsx7(
       IconButton3,
       {
         onClick: isRecording ? stopRecording : startRecording,
@@ -1411,26 +1345,26 @@ function VoiceRecorder({
           }
         },
         disabled,
-        children: isRecording ? /* @__PURE__ */ jsx8(StopIcon, {}) : /* @__PURE__ */ jsx8(MicIcon, {})
+        children: isRecording ? /* @__PURE__ */ jsx7(StopIcon, {}) : /* @__PURE__ */ jsx7(MicIcon, {})
       }
     ),
-    isRecording && /* @__PURE__ */ jsxs3(Box8, { sx: { display: "flex", alignItems: "center", gap: 1 }, children: [
-      /* @__PURE__ */ jsx8(CircularProgress2, { size: 16, color: "error" }),
-      /* @__PURE__ */ jsx8("span", { style: { fontSize: "0.8rem", color: "error.main" }, children: formatTime2(recordingTime) })
+    isRecording && /* @__PURE__ */ jsxs3(Box7, { sx: { display: "flex", alignItems: "center", gap: 1 }, children: [
+      /* @__PURE__ */ jsx7(CircularProgress2, { size: 16, color: "error" }),
+      /* @__PURE__ */ jsx7("span", { style: { fontSize: "0.8rem", color: "error.main" }, children: formatTime2(recordingTime) })
     ] })
   ] });
 }
 
 // src/client/components/Chat/components/MessageInput/index.tsx
-import { jsx as jsx9, jsxs as jsxs4 } from "react/jsx-runtime";
+import { jsx as jsx8, jsxs as jsxs4 } from "react/jsx-runtime";
 function MessageInput() {
   const { sendMessage, updateTypingStatus, config, loadingSendMessage } = useChatContext();
   const inputRef = useRef7(null);
-  const [message, setMessage] = useState6("");
-  const [isTyping, setIsTyping] = useState6(false);
+  const [message, setMessage] = useState5("");
+  const [isTyping, setIsTyping] = useState5(false);
   const typingTimeoutRef = useRef7();
   const isTypingDisabledRef = useRef7(false);
-  const [selectedFiles, setSelectedFiles] = useState6([]);
+  const [selectedFiles, setSelectedFiles] = useState5([]);
   const clearTypingTimeout = () => {
     if (typingTimeoutRef.current) {
       clearTimeout(typingTimeoutRef.current);
@@ -1478,7 +1412,7 @@ function MessageInput() {
       }
     }
   };
-  useEffect6(() => {
+  useEffect5(() => {
     const newIsTyping = message.length > 0 && !isTypingDisabledRef.current;
     if (newIsTyping !== isTyping) {
       setIsTyping(newIsTyping);
@@ -1503,7 +1437,7 @@ function MessageInput() {
       updateTypingStatus(true);
     }
   };
-  useEffect6(() => {
+  useEffect5(() => {
     return () => {
       clearTypingTimeout();
     };
@@ -1524,31 +1458,31 @@ function MessageInput() {
     );
     setSelectedFiles((prev) => [...prev, audioFile]);
   };
-  return /* @__PURE__ */ jsxs4(Box9, { children: [
-    /* @__PURE__ */ jsx9(FileList_default, { attachments: selectedFiles, onRemoveFile: handleRemoveFile }),
+  return /* @__PURE__ */ jsxs4(Box8, { children: [
+    /* @__PURE__ */ jsx8(FileList_default, { attachments: selectedFiles, onRemoveFile: handleRemoveFile }),
     /* @__PURE__ */ jsxs4(InputContainer, { children: [
-      (config == null ? void 0 : config.activeEmoji) && /* @__PURE__ */ jsx9(
+      (config == null ? void 0 : config.activeEmoji) && /* @__PURE__ */ jsx8(
         EmojiPicker_default,
         {
           onEmojiClick: handleEmojiClick,
           disabled: loadingSendMessage
         }
       ),
-      (config == null ? void 0 : config.activeFile) && /* @__PURE__ */ jsx9(
+      (config == null ? void 0 : config.activeFile) && /* @__PURE__ */ jsx8(
         FilePicker,
         {
           onFilesSelect: handleFilesSelect,
           disabled: loadingSendMessage
         }
       ),
-      (config == null ? void 0 : config.activeVoice) && /* @__PURE__ */ jsx9(
+      (config == null ? void 0 : config.activeVoice) && /* @__PURE__ */ jsx8(
         VoiceRecorder,
         {
           onRecordingComplete: handleVoiceRecording,
           disabled: loadingSendMessage
         }
       ),
-      /* @__PURE__ */ jsx9(
+      /* @__PURE__ */ jsx8(
         StyledInput,
         {
           inputProps: { ref: inputRef },
@@ -1565,10 +1499,10 @@ function MessageInput() {
           maxRows: 4
         }
       ),
-      /* @__PURE__ */ jsx9(
-        Button3,
+      /* @__PURE__ */ jsx8(
+        Button2,
         {
-          loading: loadingSendMessage,
+          disabled: loadingSendMessage,
           size: "small",
           onClick: handleSend,
           color: "primary",
@@ -1576,7 +1510,7 @@ function MessageInput() {
             minWidth: { xs: "36px", sm: "48px" },
             height: { xs: "36px", sm: "48px" }
           },
-          children: /* @__PURE__ */ jsx9(SendIcon, { fontSize: "small" })
+          children: loadingSendMessage ? /* @__PURE__ */ jsx8(CircularProgress3, { size: 20, color: "inherit" }) : /* @__PURE__ */ jsx8(SendIcon, { fontSize: "small" })
         }
       )
     ] })
@@ -1585,12 +1519,12 @@ function MessageInput() {
 
 // src/client/components/Chat/components/MessageList/index.tsx
 import "moment/locale/fr";
-import { Box as Box19, CircularProgress as CircularProgress3, Typography as Typography8 } from "@mui/material";
+import { Box as Box18, CircularProgress as CircularProgress4, Typography as Typography8 } from "@mui/material";
 
 // src/client/components/Chat/components/MessageList/styles.ts
-import { Box as Box10, Dialog, Link, Typography } from "@mui/material";
-import { styled as styled5 } from "@mui/material/styles";
-var MessageContainer = styled5(Box10)(({ theme }) => ({
+import { Box as Box9, Dialog, Link, Typography } from "@mui/material";
+import { styled as styled4 } from "@mui/material/styles";
+var MessageContainer = styled4(Box9)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(1),
@@ -1601,7 +1535,7 @@ var MessageContainer = styled5(Box10)(({ theme }) => ({
     overflow: "hidden"
   }
 }));
-var MessageTime = styled5(Typography)(({ theme }) => ({
+var MessageTime = styled4(Typography)(({ theme }) => ({
   fontSize: "0.7rem",
   color: theme.palette.text.secondary,
   marginTop: theme.spacing(0.5),
@@ -1609,7 +1543,7 @@ var MessageTime = styled5(Typography)(({ theme }) => ({
   gap: theme.spacing(1),
   alignItems: "center"
 }));
-var MessageGroup = styled5(Box10)(({ theme }) => ({
+var MessageGroup = styled4(Box9)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(0.5),
@@ -1617,7 +1551,7 @@ var MessageGroup = styled5(Box10)(({ theme }) => ({
   width: "100%",
   overflow: "hidden"
 }));
-var SystemMessage = styled5(Box10)(({ theme }) => ({
+var SystemMessage = styled4(Box9)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -1632,14 +1566,14 @@ var SystemMessage = styled5(Box10)(({ theme }) => ({
     opacity: 0.5
   }
 }));
-var MessageContent = styled5(Box10)(({ theme }) => ({
+var MessageContent = styled4(Box9)(({ theme }) => ({
   display: "flex",
   gap: theme.spacing(1),
   alignItems: "flex-start",
   width: "100%",
   overflow: "hidden"
 }));
-var AudioContainer = styled5(Box10)(({ theme }) => ({
+var AudioContainer = styled4(Box9)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   gap: theme.spacing(1),
@@ -1650,7 +1584,7 @@ var AudioContainer = styled5(Box10)(({ theme }) => ({
   overflow: "hidden",
   boxSizing: "border-box"
 }));
-var AudioProgress = styled5(Box10)(({ theme }) => ({
+var AudioProgress = styled4(Box9)(({ theme }) => ({
   flex: 1,
   height: 6,
   backgroundColor: theme.palette.grey[300],
@@ -1659,7 +1593,7 @@ var AudioProgress = styled5(Box10)(({ theme }) => ({
   overflow: "hidden",
   minWidth: 0
 }));
-var AudioProgressBar = styled5(Box10)(
+var AudioProgressBar = styled4(Box9)(
   ({ theme, progress }) => ({
     position: "absolute",
     left: 0,
@@ -1670,7 +1604,7 @@ var AudioProgressBar = styled5(Box10)(
     transition: "width 0.1s linear"
   })
 );
-var ImageContainer = styled5(Box10)(({ theme }) => ({
+var ImageContainer = styled4(Box9)(({ theme }) => ({
   position: "relative",
   width: "100%",
   maxHeight: "300px",
@@ -1683,12 +1617,12 @@ var ImageContainer = styled5(Box10)(({ theme }) => ({
     }
   }
 }));
-var StyledImage = styled5("img")({
+var StyledImage = styled4("img")({
   width: "100%",
   height: "100%",
   objectFit: "cover"
 });
-var ImageOverlay = styled5(Box10)(({ theme }) => ({
+var ImageOverlay = styled4(Box9)(({ theme }) => ({
   position: "absolute",
   top: 0,
   left: 0,
@@ -1701,7 +1635,7 @@ var ImageOverlay = styled5(Box10)(({ theme }) => ({
   opacity: 0,
   transition: "opacity 0.2s ease-in-out"
 }));
-var StyledDialog = styled5(Dialog)(({ theme }) => ({
+var StyledDialog = styled4(Dialog)(({ theme }) => ({
   "& .MuiDialog-paper": {
     backgroundColor: "rgba(0, 0, 0, 0.9)",
     maxWidth: "100vw",
@@ -1717,7 +1651,7 @@ var StyledDialog = styled5(Dialog)(({ theme }) => ({
     backgroundColor: "rgba(0, 0, 0, 0.9)"
   }
 }));
-var ViewerImageContainer = styled5(Box10)(({ theme }) => ({
+var ViewerImageContainer = styled4(Box9)(({ theme }) => ({
   position: "relative",
   width: "100%",
   height: "100%",
@@ -1727,7 +1661,7 @@ var ViewerImageContainer = styled5(Box10)(({ theme }) => ({
   padding: theme.spacing(2),
   overflow: "hidden"
 }));
-var ViewerImage = styled5("img")(
+var ViewerImage = styled4("img")(
   ({ scale }) => ({
     maxWidth: "100%",
     maxHeight: "100%",
@@ -1736,7 +1670,7 @@ var ViewerImage = styled5("img")(
     transition: "transform 0.2s ease-in-out"
   })
 );
-var ControlsContainer = styled5(Box10)(({ theme }) => ({
+var ControlsContainer = styled4(Box9)(({ theme }) => ({
   position: "absolute",
   top: theme.spacing(2),
   left: "50%",
@@ -1748,7 +1682,7 @@ var ControlsContainer = styled5(Box10)(({ theme }) => ({
   padding: theme.spacing(1),
   borderRadius: theme.shape.borderRadius
 }));
-var FileContainer = styled5(Box10)(({ theme }) => ({
+var FileContainer = styled4(Box9)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(1),
@@ -1758,7 +1692,7 @@ var FileContainer = styled5(Box10)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
   border: `1px solid ${theme.palette.divider}`
 }));
-var FileLink = styled5(Link)(({ theme }) => ({
+var FileLink = styled4(Link)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   gap: theme.spacing(1),
@@ -1772,7 +1706,7 @@ var FileLink = styled5(Link)(({ theme }) => ({
     textDecoration: "none"
   }
 }));
-var FileName = styled5(Typography)(({ theme }) => ({
+var FileName = styled4(Typography)(({ theme }) => ({
   fontSize: "0.85rem",
   fontWeight: 500,
   overflow: "hidden",
@@ -1780,7 +1714,7 @@ var FileName = styled5(Typography)(({ theme }) => ({
   whiteSpace: "nowrap",
   maxWidth: "200px"
 }));
-var IconWrapper = styled5("div")(({ theme }) => ({
+var IconWrapper = styled4("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -1789,12 +1723,12 @@ var IconWrapper = styled5("div")(({ theme }) => ({
 }));
 
 // src/client/components/Chat/components/MessageBubble/index.tsx
-import { Box as Box16, Link as Link4, Typography as Typography6 } from "@mui/material";
+import { Box as Box15, Link as Link4, Typography as Typography6 } from "@mui/material";
 
 // src/client/components/Chat/components/MessageBubble/style.ts
-import { Box as Box11 } from "@mui/material";
-import { styled as styled6 } from "@mui/material/styles";
-var StyledMessageBubble = styled6(Box11, {
+import { Box as Box10 } from "@mui/material";
+import { styled as styled5 } from "@mui/material/styles";
+var StyledMessageBubble = styled5(Box10, {
   shouldForwardProp: (prop) => prop !== "isCurrentUser" && prop !== "userColor" && prop !== "hasSpecialContent" && prop !== "hasAudio"
 })(
   ({
@@ -1832,7 +1766,7 @@ var StyledMessageBubble = styled6(Box11, {
     }
   })
 );
-var LinkContainer = styled6(Box11)(({ theme }) => ({
+var LinkContainer = styled5(Box10)(({ theme }) => ({
   display: "inline-flex",
   alignItems: "center",
   gap: theme.spacing(0.5),
@@ -1856,11 +1790,11 @@ var isAudio = (fileName) => {
 };
 
 // src/client/components/Chat/components/MessageList/AudioMessage.tsx
-import { Box as Box12, IconButton as IconButton4, Typography as Typography3 } from "@mui/material";
-import { useRef as useRef8, useState as useState7 } from "react";
+import { Box as Box11, IconButton as IconButton4, Typography as Typography3 } from "@mui/material";
+import { useRef as useRef8, useState as useState6 } from "react";
 import PauseIcon from "@mui/icons-material/Pause";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import { jsx as jsx10, jsxs as jsxs5 } from "react/jsx-runtime";
+import { jsx as jsx9, jsxs as jsxs5 } from "react/jsx-runtime";
 var formatTime = (seconds) => {
   if (!isFinite(seconds) || isNaN(seconds)) {
     return "0:00";
@@ -1870,9 +1804,9 @@ var formatTime = (seconds) => {
   return `${mins}:${secs.toString().padStart(2, "0")}`;
 };
 var AudioMessage = ({ url }) => {
-  const [isPlaying, setIsPlaying] = useState7(false);
-  const [currentTime, setCurrentTime] = useState7(0);
-  const [duration, setDuration] = useState7(0);
+  const [isPlaying, setIsPlaying] = useState6(false);
+  const [currentTime, setCurrentTime] = useState6(0);
+  const [duration, setDuration] = useState6(0);
   const audioRef = useRef8(null);
   const handlePlayPause = () => {
     var _a, _b;
@@ -1911,7 +1845,7 @@ var AudioMessage = ({ url }) => {
   };
   const progress = duration > 0 ? currentTime / duration * 100 : 0;
   return /* @__PURE__ */ jsxs5(AudioContainer, { children: [
-    /* @__PURE__ */ jsx10(
+    /* @__PURE__ */ jsx9(
       IconButton4,
       {
         size: "medium",
@@ -1925,13 +1859,13 @@ var AudioMessage = ({ url }) => {
           width: { xs: 36, sm: 40 },
           height: { xs: 36, sm: 40 }
         },
-        children: isPlaying ? /* @__PURE__ */ jsx10(PauseIcon, {}) : /* @__PURE__ */ jsx10(PlayArrowIcon, {})
+        children: isPlaying ? /* @__PURE__ */ jsx9(PauseIcon, {}) : /* @__PURE__ */ jsx9(PlayArrowIcon, {})
       }
     ),
-    /* @__PURE__ */ jsxs5(Box12, { sx: { flex: 1, minWidth: 0, pr: 1, overflow: "hidden" }, children: [
-      /* @__PURE__ */ jsx10(AudioProgress, { children: /* @__PURE__ */ jsx10(AudioProgressBar, { progress }) }),
+    /* @__PURE__ */ jsxs5(Box11, { sx: { flex: 1, minWidth: 0, pr: 1, overflow: "hidden" }, children: [
+      /* @__PURE__ */ jsx9(AudioProgress, { children: /* @__PURE__ */ jsx9(AudioProgressBar, { progress }) }),
       /* @__PURE__ */ jsxs5(
-        Box12,
+        Box11,
         {
           sx: {
             display: "flex",
@@ -1941,7 +1875,7 @@ var AudioMessage = ({ url }) => {
             gap: 1
           },
           children: [
-            /* @__PURE__ */ jsx10(
+            /* @__PURE__ */ jsx9(
               Typography3,
               {
                 variant: "caption",
@@ -1953,7 +1887,7 @@ var AudioMessage = ({ url }) => {
                 children: formatTime(currentTime)
               }
             ),
-            /* @__PURE__ */ jsx10(
+            /* @__PURE__ */ jsx9(
               Typography3,
               {
                 variant: "caption",
@@ -1983,7 +1917,7 @@ import DownloadIcon from "@mui/icons-material/Download";
 import React4 from "react";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import ZoomOutIcon from "@mui/icons-material/ZoomOut";
-import { jsx as jsx11, jsxs as jsxs6 } from "react/jsx-runtime";
+import { jsx as jsx10, jsxs as jsxs6 } from "react/jsx-runtime";
 var ImageViewer = ({
   open,
   onClose,
@@ -2009,7 +1943,7 @@ var ImageViewer = ({
     link.click();
     document.body.removeChild(link);
   };
-  return /* @__PURE__ */ jsx11(
+  return /* @__PURE__ */ jsx10(
     StyledDialog,
     {
       open,
@@ -2020,12 +1954,12 @@ var ImageViewer = ({
       disableAutoFocus: true,
       children: /* @__PURE__ */ jsxs6(ViewerImageContainer, { onClick: (e) => e.stopPropagation(), children: [
         /* @__PURE__ */ jsxs6(ControlsContainer, { children: [
-          /* @__PURE__ */ jsx11(Tooltip, { title: "Zoom avant", children: /* @__PURE__ */ jsx11(IconButton5, { onClick: handleZoomIn, sx: { color: "white" }, children: /* @__PURE__ */ jsx11(ZoomInIcon, {}) }) }),
-          /* @__PURE__ */ jsx11(Tooltip, { title: "Zoom arri\xE8re", children: /* @__PURE__ */ jsx11(IconButton5, { onClick: handleZoomOut, sx: { color: "white" }, children: /* @__PURE__ */ jsx11(ZoomOutIcon, {}) }) }),
-          /* @__PURE__ */ jsx11(Tooltip, { title: "T\xE9l\xE9charger", children: /* @__PURE__ */ jsx11(IconButton5, { onClick: handleDownload, sx: { color: "white" }, children: /* @__PURE__ */ jsx11(DownloadIcon, {}) }) }),
-          /* @__PURE__ */ jsx11(Tooltip, { title: "Fermer", children: /* @__PURE__ */ jsx11(IconButton5, { onClick: handleClose, sx: { color: "white" }, children: /* @__PURE__ */ jsx11(CloseIcon, {}) }) })
+          /* @__PURE__ */ jsx10(Tooltip, { title: "Zoom avant", children: /* @__PURE__ */ jsx10(IconButton5, { onClick: handleZoomIn, sx: { color: "white" }, children: /* @__PURE__ */ jsx10(ZoomInIcon, {}) }) }),
+          /* @__PURE__ */ jsx10(Tooltip, { title: "Zoom arri\xE8re", children: /* @__PURE__ */ jsx10(IconButton5, { onClick: handleZoomOut, sx: { color: "white" }, children: /* @__PURE__ */ jsx10(ZoomOutIcon, {}) }) }),
+          /* @__PURE__ */ jsx10(Tooltip, { title: "T\xE9l\xE9charger", children: /* @__PURE__ */ jsx10(IconButton5, { onClick: handleDownload, sx: { color: "white" }, children: /* @__PURE__ */ jsx10(DownloadIcon, {}) }) }),
+          /* @__PURE__ */ jsx10(Tooltip, { title: "Fermer", children: /* @__PURE__ */ jsx10(IconButton5, { onClick: handleClose, sx: { color: "white" }, children: /* @__PURE__ */ jsx10(CloseIcon, {}) }) })
         ] }),
-        /* @__PURE__ */ jsx11(
+        /* @__PURE__ */ jsx10(
           ViewerImage,
           {
             src: imageUrl,
@@ -2041,7 +1975,7 @@ var ImageViewer = ({
 
 // src/client/components/Chat/components/MessageList/ImageFile.tsx
 import React5 from "react";
-import { Fragment, jsx as jsx12, jsxs as jsxs7 } from "react/jsx-runtime";
+import { Fragment, jsx as jsx11, jsxs as jsxs7 } from "react/jsx-runtime";
 var ImageFile = ({ url, name, onLoad }) => {
   const [isViewerOpen, setIsViewerOpen] = React5.useState(false);
   const handleClick = (e) => {
@@ -2050,10 +1984,10 @@ var ImageFile = ({ url, name, onLoad }) => {
   };
   return /* @__PURE__ */ jsxs7(Fragment, { children: [
     /* @__PURE__ */ jsxs7(ImageContainer, { onClick: handleClick, children: [
-      /* @__PURE__ */ jsx12(StyledImage, { src: url, alt: name, onLoad }),
-      /* @__PURE__ */ jsx12(ImageOverlay, { className: "image-overlay", children: /* @__PURE__ */ jsx12(Typography4, { variant: "body2", color: "white", children: "Cliquez pour agrandir" }) })
+      /* @__PURE__ */ jsx11(StyledImage, { src: url, alt: name, onLoad }),
+      /* @__PURE__ */ jsx11(ImageOverlay, { className: "image-overlay", children: /* @__PURE__ */ jsx11(Typography4, { variant: "body2", color: "white", children: "Cliquez pour agrandir" }) })
     ] }),
-    /* @__PURE__ */ jsx12(
+    /* @__PURE__ */ jsx11(
       ImageViewer,
       {
         open: isViewerOpen,
@@ -2066,18 +2000,18 @@ var ImageFile = ({ url, name, onLoad }) => {
 };
 
 // src/client/components/Chat/components/MessageList/RegularFile.tsx
-import { Box as Box15 } from "@mui/material";
+import { Box as Box14 } from "@mui/material";
 import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
-import { jsx as jsx13, jsxs as jsxs8 } from "react/jsx-runtime";
+import { jsx as jsx12, jsxs as jsxs8 } from "react/jsx-runtime";
 var RegularFile = ({ name, url }) => {
   return /* @__PURE__ */ jsxs8(FileContainer, { children: [
-    /* @__PURE__ */ jsx13(IconWrapper, { children: /* @__PURE__ */ jsx13(InsertDriveFileIcon, {}) }),
-    /* @__PURE__ */ jsx13(Box15, { sx: { flex: 1, minWidth: 0 }, children: /* @__PURE__ */ jsx13(FileLink, { href: url, target: "_blank", rel: "noopener noreferrer", children: /* @__PURE__ */ jsx13(FileName, { variant: "body2", noWrap: true, children: name }) }) })
+    /* @__PURE__ */ jsx12(IconWrapper, { children: /* @__PURE__ */ jsx12(InsertDriveFileIcon, {}) }),
+    /* @__PURE__ */ jsx12(Box14, { sx: { flex: 1, minWidth: 0 }, children: /* @__PURE__ */ jsx12(FileLink, { href: url, target: "_blank", rel: "noopener noreferrer", children: /* @__PURE__ */ jsx12(FileName, { variant: "body2", noWrap: true, children: name }) }) })
   ] });
 };
 
 // src/client/components/Chat/components/MessageList/MessageFiles.tsx
-import { jsx as jsx14 } from "react/jsx-runtime";
+import { jsx as jsx13 } from "react/jsx-runtime";
 var MessageFiles = ({
   attachments,
   onImageLoad
@@ -2085,9 +2019,9 @@ var MessageFiles = ({
   if (!attachments || attachments.length === 0) {
     return null;
   }
-  return /* @__PURE__ */ jsx14(FileContainer, { children: attachments.map((attachment, index) => {
+  return /* @__PURE__ */ jsx13(FileContainer, { children: attachments.map((attachment, index) => {
     if (isImage(attachment.name)) {
-      return /* @__PURE__ */ jsx14(
+      return /* @__PURE__ */ jsx13(
         ImageFile,
         {
           url: attachment.url,
@@ -2097,9 +2031,9 @@ var MessageFiles = ({
         index
       );
     } else if (isAudio(attachment.name)) {
-      return /* @__PURE__ */ jsx14(AudioMessage, { url: attachment.url }, index);
+      return /* @__PURE__ */ jsx13(AudioMessage, { url: attachment.url }, index);
     } else {
-      return /* @__PURE__ */ jsx14(
+      return /* @__PURE__ */ jsx13(
         RegularFile,
         {
           url: attachment.url,
@@ -2113,7 +2047,7 @@ var MessageFiles = ({
 
 // src/client/components/Chat/components/MessageBubble/index.tsx
 import React6 from "react";
-import { jsx as jsx15, jsxs as jsxs9 } from "react/jsx-runtime";
+import { jsx as jsx14, jsxs as jsxs9 } from "react/jsx-runtime";
 var detectUrls = (text, isCurrentUser) => {
   const urlRegex = /(https?:\/\/[^\s]+)/g;
   const parts = text.split(urlRegex);
@@ -2121,7 +2055,7 @@ var detectUrls = (text, isCurrentUser) => {
   return parts.map((part, index) => {
     if (matches.includes(part)) {
       return /* @__PURE__ */ jsxs9(LinkContainer, { children: [
-        /* @__PURE__ */ jsx15(
+        /* @__PURE__ */ jsx14(
           Link4,
           {
             href: part,
@@ -2137,7 +2071,7 @@ var detectUrls = (text, isCurrentUser) => {
             children: part
           }
         ),
-        /* @__PURE__ */ jsx15(
+        /* @__PURE__ */ jsx14(
           LinkIcon,
           {
             onClick: () => window.open(part, "_blank", "noopener,noreferrer"),
@@ -2152,7 +2086,7 @@ var detectUrls = (text, isCurrentUser) => {
         )
       ] }, index);
     }
-    return /* @__PURE__ */ jsx15(React6.Fragment, { children: part }, index);
+    return /* @__PURE__ */ jsx14(React6.Fragment, { children: part }, index);
   });
 };
 var MessageBubble = ({
@@ -2164,15 +2098,15 @@ var MessageBubble = ({
   attachments,
   onImageLoad
 }) => {
-  return /* @__PURE__ */ jsx15(
+  return /* @__PURE__ */ jsx14(
     StyledMessageBubble,
     {
       isCurrentUser,
       userColor,
       hasSpecialContent,
       hasAudio,
-      children: /* @__PURE__ */ jsxs9(Box16, { component: "div", children: [
-        /* @__PURE__ */ jsx15(
+      children: /* @__PURE__ */ jsxs9(Box15, { component: "div", children: [
+        /* @__PURE__ */ jsx14(
           Typography6,
           {
             component: "span",
@@ -2181,7 +2115,7 @@ var MessageBubble = ({
             children: detectUrls(content, isCurrentUser)
           }
         ),
-        attachments && /* @__PURE__ */ jsx15(MessageFiles, { attachments, onImageLoad })
+        attachments && /* @__PURE__ */ jsx14(MessageFiles, { attachments, onImageLoad })
       ] })
     }
   );
@@ -2191,14 +2125,14 @@ var MessageBubble = ({
 import React8 from "react";
 
 // src/client/components/Chat/components/SeenBy/index.tsx
-import { Box as Box18, Tooltip as Tooltip2, Typography as Typography7 } from "@mui/material";
+import { Box as Box17, Tooltip as Tooltip2, Typography as Typography7 } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 // src/client/components/Chat/components/SeenBy/style.ts
-import { Box as Box17 } from "@mui/material";
-import { styled as styled7 } from "@mui/material/styles";
-var SeenContainer = styled7(Box17)(({ theme }) => ({
+import { Box as Box16 } from "@mui/material";
+import { styled as styled6 } from "@mui/material/styles";
+var SeenContainer = styled6(Box16)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   gap: theme.spacing(0.5),
@@ -2210,7 +2144,7 @@ var SeenContainer = styled7(Box17)(({ theme }) => ({
 
 // src/client/components/Chat/components/SeenBy/index.tsx
 import moment from "moment";
-import { jsx as jsx16, jsxs as jsxs10 } from "react/jsx-runtime";
+import { jsx as jsx15, jsxs as jsxs10 } from "react/jsx-runtime";
 var SeenBy = ({
   message,
   userId,
@@ -2224,7 +2158,7 @@ var SeenBy = ({
   }));
   if (seenParticipants.length === 0) return null;
   const allParticipantsHaveSeen = seenParticipants.length === totalParticipants - 1;
-  const tooltipContent = /* @__PURE__ */ jsx16(Box18, { children: seenParticipants.map((participant) => /* @__PURE__ */ jsxs10(
+  const tooltipContent = /* @__PURE__ */ jsx15(Box17, { children: seenParticipants.map((participant) => /* @__PURE__ */ jsxs10(
     Typography7,
     {
       variant: "caption",
@@ -2237,19 +2171,19 @@ var SeenBy = ({
     },
     participant.id
   )) });
-  return /* @__PURE__ */ jsx16(SeenContainer, { children: /* @__PURE__ */ jsx16(Tooltip2, { title: tooltipContent, children: allParticipantsHaveSeen ? /* @__PURE__ */ jsx16(CheckCircleIcon, {}) : /* @__PURE__ */ jsx16(CheckCircleOutlineIcon, {}) }) });
+  return /* @__PURE__ */ jsx15(SeenContainer, { children: /* @__PURE__ */ jsx15(Tooltip2, { title: tooltipContent, children: allParticipantsHaveSeen ? /* @__PURE__ */ jsx15(CheckCircleIcon, {}) : /* @__PURE__ */ jsx15(CheckCircleOutlineIcon, {}) }) });
 };
 
 // src/client/components/Chat/components/UserAvatar/index.tsx
 import { Avatar, Tooltip as Tooltip3 } from "@mui/material";
 import React7 from "react";
-import { jsx as jsx17 } from "react/jsx-runtime";
+import { jsx as jsx16 } from "react/jsx-runtime";
 var UserAvatar = React7.forwardRef(
   ({ user, size = 32 }, ref) => {
     const getInitials = (name) => {
       return name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2);
     };
-    return /* @__PURE__ */ jsx17(Tooltip3, { title: user.name, arrow: true, placement: "top", children: /* @__PURE__ */ jsx17(
+    return /* @__PURE__ */ jsx16(Tooltip3, { title: user.name, arrow: true, placement: "top", children: /* @__PURE__ */ jsx16(
       Avatar,
       {
         ref,
@@ -2282,7 +2216,7 @@ var generateColorFromId = (id) => {
 
 // src/client/components/Chat/components/MessageList/index.tsx
 import moment2 from "moment";
-import { jsx as jsx18, jsxs as jsxs11 } from "react/jsx-runtime";
+import { jsx as jsx17, jsxs as jsxs11 } from "react/jsx-runtime";
 moment2.locale("fr");
 var MessageList = () => {
   const {
@@ -2322,8 +2256,8 @@ var MessageList = () => {
     }
   }, [shouldShowContent, messages.length, scrollManager]);
   if (isLoading || !shouldShowContent) {
-    return /* @__PURE__ */ jsx18(
-      Box19,
+    return /* @__PURE__ */ jsx17(
+      Box18,
       {
         sx: {
           display: "flex",
@@ -2332,13 +2266,13 @@ var MessageList = () => {
           height: "100%",
           minHeight: "200px"
         },
-        children: /* @__PURE__ */ jsx18(CircularProgress3, {})
+        children: /* @__PURE__ */ jsx17(CircularProgress4, {})
       }
     );
   }
   if (!isLoading && messages.length === 0) {
     return /* @__PURE__ */ jsxs11(MessageContainer, { ref: containerRef, children: [
-      /* @__PURE__ */ jsx18(SystemMessage, { children: /* @__PURE__ */ jsx18(
+      /* @__PURE__ */ jsx17(SystemMessage, { children: /* @__PURE__ */ jsx17(
         Typography8,
         {
           variant: "body2",
@@ -2351,7 +2285,7 @@ var MessageList = () => {
           children: (config == null ? void 0 : config.welcomeMessage) || "Aucun message pour le moment"
         }
       ) }),
-      /* @__PURE__ */ jsx18("div", { ref: messageEndRef })
+      /* @__PURE__ */ jsx17("div", { ref: messageEndRef })
     ] });
   }
   return /* @__PURE__ */ jsxs11(MessageContainer, { ref: containerRef, className: isLoading ? "loading" : "", children: [
@@ -2368,7 +2302,7 @@ var MessageList = () => {
         (attachment) => attachment.name.match(/\.(mp3|wav|ogg|m4a)$/i)
       );
       if (((_d = message.type) == null ? void 0 : _d.toLowerCase()) === "system") {
-        return /* @__PURE__ */ jsx18(SystemMessage, { children: /* @__PURE__ */ jsx18(
+        return /* @__PURE__ */ jsx17(SystemMessage, { children: /* @__PURE__ */ jsx17(
           Typography8,
           {
             variant: "body2",
@@ -2382,15 +2316,15 @@ var MessageList = () => {
           }
         ) }, message.id);
       }
-      return /* @__PURE__ */ jsx18(
+      return /* @__PURE__ */ jsx17(
         MessageGroup,
         {
           className: "message-group",
           "data-message-id": message.id,
           children: /* @__PURE__ */ jsxs11(MessageContent, { children: [
-            !isCurrentUser && /* @__PURE__ */ jsx18(Box19, { sx: { flexShrink: 0 }, children: /* @__PURE__ */ jsx18(UserAvatar, { user: getParticipant(message.userId) }) }),
-            /* @__PURE__ */ jsxs11(Box19, { sx: { display: "flex", flexDirection: "column", flex: 1 }, children: [
-              /* @__PURE__ */ jsx18(
+            !isCurrentUser && /* @__PURE__ */ jsx17(Box18, { sx: { flexShrink: 0 }, children: /* @__PURE__ */ jsx17(UserAvatar, { user: getParticipant(message.userId) }) }),
+            /* @__PURE__ */ jsxs11(Box18, { sx: { display: "flex", flexDirection: "column", flex: 1 }, children: [
+              /* @__PURE__ */ jsx17(
                 MessageBubble,
                 {
                   isCurrentUser,
@@ -2409,8 +2343,8 @@ var MessageList = () => {
                     alignSelf: isCurrentUser ? "flex-end" : "flex-start"
                   },
                   children: [
-                    /* @__PURE__ */ jsx18("span", { children: moment2(new Date(message.createdAt)).isBefore(moment2().subtract(1, "day")) ? moment2(new Date(message.createdAt)).format("DD/MM/YYYY HH:mm") : moment2(new Date(message.createdAt)).format("HH:mm") }),
-                    isCurrentUser && /* @__PURE__ */ jsx18(
+                    /* @__PURE__ */ jsx17("span", { children: moment2(new Date(message.createdAt)).isBefore(moment2().subtract(1, "day")) ? moment2(new Date(message.createdAt)).format("DD/MM/YYYY HH:mm") : moment2(new Date(message.createdAt)).format("HH:mm") }),
+                    isCurrentUser && /* @__PURE__ */ jsx17(
                       SeenBy,
                       {
                         message,
@@ -2423,24 +2357,24 @@ var MessageList = () => {
                 }
               )
             ] }),
-            isCurrentUser && /* @__PURE__ */ jsx18(Box19, { sx: { flexShrink: 0 }, children: /* @__PURE__ */ jsx18(UserAvatar, { user: getParticipant(message.userId) }) })
+            isCurrentUser && /* @__PURE__ */ jsx17(Box18, { sx: { flexShrink: 0 }, children: /* @__PURE__ */ jsx17(UserAvatar, { user: getParticipant(message.userId) }) })
           ] })
         },
         message.id
       );
     }),
-    /* @__PURE__ */ jsx18("div", { ref: messageEndRef })
+    /* @__PURE__ */ jsx17("div", { ref: messageEndRef })
   ] });
 };
 
 // src/client/components/Chat/components/TypingIndicator/index.tsx
 import { Collapse, Typography as Typography9 } from "@mui/material";
-import { useEffect as useEffect7, useState as useState8 } from "react";
+import { useEffect as useEffect6, useState as useState7 } from "react";
 
 // src/client/components/Chat/components/TypingIndicator/styles.ts
-import { Box as Box20 } from "@mui/material";
-import { styled as styled8 } from "@mui/material/styles";
-var Container = styled8(Box20)(({ theme }) => ({
+import { Box as Box19 } from "@mui/material";
+import { styled as styled7 } from "@mui/material/styles";
+var Container = styled7(Box19)(({ theme }) => ({
   padding: theme.spacing(0.5),
   marginTop: theme.spacing(0.5),
   marginBottom: theme.spacing(0.5),
@@ -2450,14 +2384,14 @@ var Container = styled8(Box20)(({ theme }) => ({
 }));
 
 // src/client/components/Chat/components/TypingIndicator/index.tsx
-import { jsx as jsx19 } from "react/jsx-runtime";
+import { jsx as jsx18 } from "react/jsx-runtime";
 var TypingIndicator = () => {
   const { typingUsers, participants, userId } = useChatContext();
-  const [isVisible, setIsVisible] = useState8(false);
+  const [isVisible, setIsVisible] = useState7(false);
   const typingUsersWithoutCurrentUser = typingUsers.filter(
     (user) => user !== userId
   );
-  useEffect7(() => {
+  useEffect6(() => {
     if (typingUsersWithoutCurrentUser.length > 0) {
       setIsVisible(true);
     } else {
@@ -2483,7 +2417,7 @@ var TypingIndicator = () => {
     }
   };
   const typingText = getTypingUsersNames();
-  return /* @__PURE__ */ jsx19(Collapse, { in: isVisible, sx: { pl: 2 }, children: /* @__PURE__ */ jsx19(Container, { children: /* @__PURE__ */ jsx19(
+  return /* @__PURE__ */ jsx18(Collapse, { in: isVisible, sx: { pl: 2 }, children: /* @__PURE__ */ jsx18(Container, { children: /* @__PURE__ */ jsx18(
     Typography9,
     {
       variant: "caption",
@@ -2500,56 +2434,55 @@ var TypingIndicator = () => {
 };
 
 // src/client/components/Chat/index.tsx
-import { Fragment as Fragment2, jsx as jsx20, jsxs as jsxs12 } from "react/jsx-runtime";
+import { Fragment as Fragment2, jsx as jsx19, jsxs as jsxs12 } from "react/jsx-runtime";
 var ChatConversationContent = () => {
   const { scrollManager } = useChatContext();
   const { contentRef } = scrollManager;
   return /* @__PURE__ */ jsxs12(Fragment2, { children: [
     /* @__PURE__ */ jsxs12(Content, { ref: contentRef, children: [
-      /* @__PURE__ */ jsx20(LoadMoreMessages, {}),
-      /* @__PURE__ */ jsx20(MessageList, {})
+      /* @__PURE__ */ jsx19(LoadMoreMessages, {}),
+      /* @__PURE__ */ jsx19(MessageList, {})
     ] }),
-    /* @__PURE__ */ jsx20(ChatActions, {}),
-    /* @__PURE__ */ jsx20(TypingIndicator, {}),
-    /* @__PURE__ */ jsx20(MessageInput, {})
+    /* @__PURE__ */ jsx19(TypingIndicator, {}),
+    /* @__PURE__ */ jsx19(MessageInput, {})
   ] });
 };
 var ChatNoConversationContent = ({ buttonJoin }) => {
-  return /* @__PURE__ */ jsx20(Fragment2, { children: /* @__PURE__ */ jsx20(Content, { children: buttonJoin ? buttonJoin : /* @__PURE__ */ jsxs12(WaitingMessageContainer, { children: [
-    /* @__PURE__ */ jsx20(WaitingMessageEmoji, { children: "\u{1F4AD}" }),
-    /* @__PURE__ */ jsx20(WaitingMessageTitle, { children: "En attente de conversation" }),
-    /* @__PURE__ */ jsx20(WaitingMessageText, { children: "La conversation n'est pas encore active. Revenez bient\xF4t pour discuter !" })
+  return /* @__PURE__ */ jsx19(Fragment2, { children: /* @__PURE__ */ jsx19(Content, { children: buttonJoin ? buttonJoin : /* @__PURE__ */ jsxs12(WaitingMessageContainer, { children: [
+    /* @__PURE__ */ jsx19(WaitingMessageEmoji, { children: "\u{1F4AD}" }),
+    /* @__PURE__ */ jsx19(WaitingMessageTitle, { children: "En attente de conversation" }),
+    /* @__PURE__ */ jsx19(WaitingMessageText, { children: "La conversation n'est pas encore active. Revenez bient\xF4t pour discuter !" })
   ] }) }) });
 };
 var Chat = (props) => {
   const _a = props, { conversationId, buttonJoin } = _a, rest = __objRest(_a, ["conversationId", "buttonJoin"]);
   if (conversationId) {
-    return /* @__PURE__ */ jsx20(ChatProvider, __spreadProps(__spreadValues({}, rest), { conversationId, children: /* @__PURE__ */ jsx20(ChatConversationContent, {}) }));
+    return /* @__PURE__ */ jsx19(ChatProvider, __spreadProps(__spreadValues({}, rest), { conversationId, children: /* @__PURE__ */ jsx19(ChatConversationContent, {}) }));
   }
-  return /* @__PURE__ */ jsx20(ChatNoConversationContent, { buttonJoin });
+  return /* @__PURE__ */ jsx19(ChatNoConversationContent, { buttonJoin });
 };
 
 // src/client/components/ChatBubble/index.tsx
-import { useState as useState11 } from "react";
+import { useState as useState10 } from "react";
 import { Badge } from "@mui/material";
 import ChatIcon from "@mui/icons-material/Chat";
 
 // src/client/components/ChatPopup/index.tsx
-import React13, { useEffect as useEffect8 } from "react";
+import React13, { useEffect as useEffect7 } from "react";
 
 // src/client/components/ChatPopup/components/Header/index.tsx
-import { Box as Box27, IconButton as IconButton9, Typography as Typography13 } from "@mui/material";
-import { useState as useState10 } from "react";
+import { Box as Box26, IconButton as IconButton9, Typography as Typography13 } from "@mui/material";
+import { useState as useState9 } from "react";
 import Close from "@mui/icons-material/Close";
 import CloseFullscreen from "@mui/icons-material/CloseFullscreen";
 
 // src/client/components/ChatPopup/components/Header/DocumentsMenu/index.tsx
-import { Box as Box23, IconButton as IconButton6, Typography as Typography10 } from "@mui/material";
+import { Box as Box22, IconButton as IconButton6, Typography as Typography10 } from "@mui/material";
 
 // src/client/components/ChatPopup/components/Header/DocumentsMenu/styles.ts
-import { Box as Box21, List, Popover as Popover2 } from "@mui/material";
-import { styled as styled9 } from "@mui/material/styles";
-var StyledPopover = styled9(Popover2)(({ theme }) => ({
+import { Box as Box20, List, Popover as Popover2 } from "@mui/material";
+import { styled as styled8 } from "@mui/material/styles";
+var StyledPopover = styled8(Popover2)(({ theme }) => ({
   "& .MuiPaper-root": {
     width: 280,
     maxHeight: 360,
@@ -2560,7 +2493,7 @@ var StyledPopover = styled9(Popover2)(({ theme }) => ({
     flexDirection: "column"
   }
 }));
-var MenuHeader = styled9(Box21)(({ theme }) => ({
+var MenuHeader = styled8(Box20)(({ theme }) => ({
   padding: theme.spacing(1.5),
   borderBottom: `1px solid ${theme.palette.divider}`,
   display: "flex",
@@ -2572,7 +2505,7 @@ var MenuHeader = styled9(Box21)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
   zIndex: 1
 }));
-var StyledList = styled9(List)(({ theme }) => ({
+var StyledList = styled8(List)(({ theme }) => ({
   flex: 1,
   overflow: "auto",
   py: 0
@@ -2583,9 +2516,9 @@ import { useRef as useRef9 } from "react";
 import CloseIcon2 from "@mui/icons-material/Close";
 
 // src/client/components/FileManager/styles.ts
-import { Box as Box22 } from "@mui/material";
-import { styled as styled10 } from "@mui/material/styles";
-var FileContainer2 = styled10(Box22)(({ theme }) => ({
+import { Box as Box21 } from "@mui/material";
+import { styled as styled9 } from "@mui/material/styles";
+var FileContainer2 = styled9(Box21)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(1),
@@ -2600,7 +2533,7 @@ var FileContainer2 = styled10(Box22)(({ theme }) => ({
 }));
 
 // src/client/components/FileManager/FileItem.tsx
-import { jsx as jsx21 } from "react/jsx-runtime";
+import { jsx as jsx20 } from "react/jsx-runtime";
 var FileItem = ({ file, onClick }) => {
   const handleClick = (e) => {
     if (isAudio(file.name)) {
@@ -2612,12 +2545,12 @@ var FileItem = ({ file, onClick }) => {
       window.open(file.url, "_blank");
     }
   };
-  return /* @__PURE__ */ jsx21(FileContainer2, { onClick: handleClick, children: isImage(file.name) ? /* @__PURE__ */ jsx21(ImageFile, { url: file.url, name: file.name }) : isAudio(file.name) ? /* @__PURE__ */ jsx21(AudioMessage, { url: file.url }) : /* @__PURE__ */ jsx21(RegularFile, { url: file.url, name: file.name }) });
+  return /* @__PURE__ */ jsx20(FileContainer2, { onClick: handleClick, children: isImage(file.name) ? /* @__PURE__ */ jsx20(ImageFile, { url: file.url, name: file.name }) : isAudio(file.name) ? /* @__PURE__ */ jsx20(AudioMessage, { url: file.url }) : /* @__PURE__ */ jsx20(RegularFile, { url: file.url, name: file.name }) });
 };
 
 // src/client/components/ChatPopup/components/Header/DocumentsMenu/index.tsx
 import InsertDriveFileIcon2 from "@mui/icons-material/InsertDriveFile";
-import { Fragment as Fragment3, jsx as jsx22, jsxs as jsxs13 } from "react/jsx-runtime";
+import { Fragment as Fragment3, jsx as jsx21, jsxs as jsxs13 } from "react/jsx-runtime";
 var DocumentsMenu = ({
   allAttachments,
   open,
@@ -2625,7 +2558,7 @@ var DocumentsMenu = ({
 }) => {
   const anchorRef = useRef9(null);
   return /* @__PURE__ */ jsxs13(Fragment3, { children: [
-    /* @__PURE__ */ jsx22(
+    /* @__PURE__ */ jsx21(
       IconButton6,
       {
         ref: anchorRef,
@@ -2637,7 +2570,7 @@ var DocumentsMenu = ({
             color: (theme) => theme.palette.primary.main
           }
         },
-        children: /* @__PURE__ */ jsx22(InsertDriveFileIcon2, { fontSize: "small" })
+        children: /* @__PURE__ */ jsx21(InsertDriveFileIcon2, { fontSize: "small" })
       }
     ),
     /* @__PURE__ */ jsxs13(
@@ -2657,17 +2590,17 @@ var DocumentsMenu = ({
         onClick: (e) => e.stopPropagation(),
         children: [
           /* @__PURE__ */ jsxs13(MenuHeader, { children: [
-            /* @__PURE__ */ jsxs13(Box23, { sx: { display: "flex", alignItems: "center", gap: 1 }, children: [
-              /* @__PURE__ */ jsx22(InsertDriveFileIcon2, { fontSize: "small", color: "primary" }),
+            /* @__PURE__ */ jsxs13(Box22, { sx: { display: "flex", alignItems: "center", gap: 1 }, children: [
+              /* @__PURE__ */ jsx21(InsertDriveFileIcon2, { fontSize: "small", color: "primary" }),
               /* @__PURE__ */ jsxs13(Typography10, { variant: "subtitle2", fontWeight: "bold", children: [
                 "Documents (",
                 (allAttachments == null ? void 0 : allAttachments.length) || 0,
                 ")"
               ] })
             ] }),
-            /* @__PURE__ */ jsx22(IconButton6, { size: "small", onClick: onClose, children: /* @__PURE__ */ jsx22(CloseIcon2, { fontSize: "small" }) })
+            /* @__PURE__ */ jsx21(IconButton6, { size: "small", onClick: onClose, children: /* @__PURE__ */ jsx21(CloseIcon2, { fontSize: "small" }) })
           ] }),
-          /* @__PURE__ */ jsx22(StyledList, { children: (allAttachments == null ? void 0 : allAttachments.length) === 0 ? /* @__PURE__ */ jsx22(Box23, { sx: { p: 2, textAlign: "center" }, children: /* @__PURE__ */ jsx22(Typography10, { variant: "body2", color: "text.secondary", children: "Aucun document partag\xE9 dans cette conversation" }) }) : allAttachments == null ? void 0 : allAttachments.map((file, index) => /* @__PURE__ */ jsx22(FileItem, { file }, index)) })
+          /* @__PURE__ */ jsx21(StyledList, { children: (allAttachments == null ? void 0 : allAttachments.length) === 0 ? /* @__PURE__ */ jsx21(Box22, { sx: { p: 2, textAlign: "center" }, children: /* @__PURE__ */ jsx21(Typography10, { variant: "body2", color: "text.secondary", children: "Aucun document partag\xE9 dans cette conversation" }) }) : allAttachments == null ? void 0 : allAttachments.map((file, index) => /* @__PURE__ */ jsx21(FileItem, { file }, index)) })
         ]
       }
     )
@@ -2682,12 +2615,12 @@ import {
   Tooltip as Tooltip4,
   Typography as Typography12
 } from "@mui/material";
-import { useState as useState9 } from "react";
+import { useState as useState8 } from "react";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 // src/client/components/ChatPopup/components/Header/ParticipantsMenu/index.tsx
 import {
-  Box as Box25,
+  Box as Box24,
   IconButton as IconButton7,
   ListItemIcon,
   ListItemText,
@@ -2695,9 +2628,9 @@ import {
 } from "@mui/material";
 
 // src/client/components/ChatPopup/components/Header/ParticipantsMenu/styles.ts
-import { Box as Box24, List as List2, ListItem, Popover as Popover3 } from "@mui/material";
-import { styled as styled11 } from "@mui/material/styles";
-var StyledPopover2 = styled11(Popover3)(({ theme }) => ({
+import { Box as Box23, List as List2, ListItem, Popover as Popover3 } from "@mui/material";
+import { styled as styled10 } from "@mui/material/styles";
+var StyledPopover2 = styled10(Popover3)(({ theme }) => ({
   "& .MuiPaper-root": {
     width: 280,
     maxHeight: 360,
@@ -2708,7 +2641,7 @@ var StyledPopover2 = styled11(Popover3)(({ theme }) => ({
     flexDirection: "column"
   }
 }));
-var MenuHeader2 = styled11(Box24)(({ theme }) => ({
+var MenuHeader2 = styled10(Box23)(({ theme }) => ({
   padding: theme.spacing(1.5),
   borderBottom: `1px solid ${theme.palette.divider}`,
   display: "flex",
@@ -2720,7 +2653,7 @@ var MenuHeader2 = styled11(Box24)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
   zIndex: 1
 }));
-var ParticipantAvatar = styled11(Box24)(({ theme }) => ({
+var ParticipantAvatar = styled10(Box23)(({ theme }) => ({
   width: 32,
   height: 32,
   borderRadius: "50%",
@@ -2738,13 +2671,13 @@ var ParticipantAvatar = styled11(Box24)(({ theme }) => ({
     objectFit: "cover"
   }
 }));
-var StyledListItem = styled11(ListItem)(({ theme }) => ({
+var StyledListItem = styled10(ListItem)(({ theme }) => ({
   padding: theme.spacing(0.75, 1.5),
   "&:hover": {
     backgroundColor: theme.palette.action.hover
   }
 }));
-var StyledList2 = styled11(List2)(({ theme }) => ({
+var StyledList2 = styled10(List2)(({ theme }) => ({
   flex: 1,
   overflow: "auto",
   py: 0
@@ -2753,7 +2686,7 @@ var StyledList2 = styled11(List2)(({ theme }) => ({
 // src/client/components/ChatPopup/components/Header/ParticipantsMenu/index.tsx
 import { useRef as useRef10 } from "react";
 import GroupIcon from "@mui/icons-material/Group";
-import { Fragment as Fragment4, jsx as jsx23, jsxs as jsxs14 } from "react/jsx-runtime";
+import { Fragment as Fragment4, jsx as jsx22, jsxs as jsxs14 } from "react/jsx-runtime";
 var ParticipantsMenu = ({
   participants,
   renderParticipant,
@@ -2762,7 +2695,7 @@ var ParticipantsMenu = ({
 }) => {
   const anchorRef = useRef10(null);
   return /* @__PURE__ */ jsxs14(Fragment4, { children: [
-    /* @__PURE__ */ jsx23(
+    /* @__PURE__ */ jsx22(
       IconButton7,
       {
         ref: anchorRef,
@@ -2774,7 +2707,7 @@ var ParticipantsMenu = ({
             color: (theme) => theme.palette.primary.main
           }
         },
-        children: /* @__PURE__ */ jsx23(GroupIcon, { fontSize: "small" })
+        children: /* @__PURE__ */ jsx22(GroupIcon, { fontSize: "small" })
       }
     ),
     /* @__PURE__ */ jsxs14(
@@ -2793,16 +2726,16 @@ var ParticipantsMenu = ({
         },
         onClick: (e) => e.stopPropagation(),
         children: [
-          /* @__PURE__ */ jsx23(MenuHeader2, { children: /* @__PURE__ */ jsxs14(Box25, { sx: { display: "flex", alignItems: "center", gap: 1 }, children: [
-            /* @__PURE__ */ jsx23(GroupIcon, { fontSize: "small", color: "primary" }),
+          /* @__PURE__ */ jsx22(MenuHeader2, { children: /* @__PURE__ */ jsxs14(Box24, { sx: { display: "flex", alignItems: "center", gap: 1 }, children: [
+            /* @__PURE__ */ jsx22(GroupIcon, { fontSize: "small", color: "primary" }),
             /* @__PURE__ */ jsxs14(Typography11, { variant: "subtitle2", fontWeight: "bold", children: [
               "Participants (",
               participants.length,
               ")"
             ] })
           ] }) }),
-          /* @__PURE__ */ jsx23(StyledList2, { children: participants.map((participant) => /* @__PURE__ */ jsxs14(StyledListItem, { children: [
-            /* @__PURE__ */ jsx23(ListItemIcon, { sx: { minWidth: 36 }, children: renderParticipant ? renderParticipant(participant) : /* @__PURE__ */ jsx23(ParticipantAvatar, { children: /* @__PURE__ */ jsx23(
+          /* @__PURE__ */ jsx22(StyledList2, { children: participants.map((participant) => /* @__PURE__ */ jsxs14(StyledListItem, { children: [
+            /* @__PURE__ */ jsx22(ListItemIcon, { sx: { minWidth: 36 }, children: renderParticipant ? renderParticipant(participant) : /* @__PURE__ */ jsx22(ParticipantAvatar, { children: /* @__PURE__ */ jsx22(
               Typography11,
               {
                 variant: "caption",
@@ -2810,10 +2743,10 @@ var ParticipantsMenu = ({
                 children: participant.name.split(" ").map((word) => word[0]).join("").toUpperCase().slice(0, 2)
               }
             ) }) }),
-            /* @__PURE__ */ jsx23(
+            /* @__PURE__ */ jsx22(
               ListItemText,
               {
-                primary: /* @__PURE__ */ jsx23(Typography11, { variant: "body2", fontWeight: 500, children: participant.name })
+                primary: /* @__PURE__ */ jsx22(Typography11, { variant: "body2", fontWeight: 500, children: participant.name })
               }
             )
           ] }, participant.id)) })
@@ -2824,15 +2757,15 @@ var ParticipantsMenu = ({
 };
 
 // src/client/components/ChatPopup/components/Header/HeaderMenu.tsx
-import { Fragment as Fragment5, jsx as jsx24, jsxs as jsxs15 } from "react/jsx-runtime";
+import { Fragment as Fragment5, jsx as jsx23, jsxs as jsxs15 } from "react/jsx-runtime";
 var HeaderMenu = ({
   participants,
   renderParticipant,
   allAttachments
 }) => {
-  const [anchorEl, setAnchorEl] = useState9(null);
-  const [isDocumentsOpen, setIsDocumentsOpen] = useState9(false);
-  const [isParticipantsOpen, setIsParticipantsOpen] = useState9(false);
+  const [anchorEl, setAnchorEl] = useState8(null);
+  const [isDocumentsOpen, setIsDocumentsOpen] = useState8(false);
+  const [isParticipantsOpen, setIsParticipantsOpen] = useState8(false);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -2858,7 +2791,7 @@ var HeaderMenu = ({
     setIsParticipantsOpen(false);
   };
   return /* @__PURE__ */ jsxs15(Fragment5, { children: [
-    /* @__PURE__ */ jsx24(Tooltip4, { title: "Options", children: /* @__PURE__ */ jsx24(
+    /* @__PURE__ */ jsx23(Tooltip4, { title: "Options", children: /* @__PURE__ */ jsx23(
       IconButton8,
       {
         onClick: handleClick,
@@ -2870,7 +2803,7 @@ var HeaderMenu = ({
             color: (theme) => theme.palette.primary.main
           }
         },
-        children: /* @__PURE__ */ jsx24(MoreVertIcon, { fontSize: "small" })
+        children: /* @__PURE__ */ jsx23(MoreVertIcon, { fontSize: "small" })
       }
     ) }),
     /* @__PURE__ */ jsxs15(
@@ -2890,7 +2823,7 @@ var HeaderMenu = ({
         onClick: (e) => e.stopPropagation(),
         children: [
           /* @__PURE__ */ jsxs15(MenuItem, { onClick: handleDocumentClick, children: [
-            /* @__PURE__ */ jsx24(
+            /* @__PURE__ */ jsx23(
               DocumentsMenu,
               {
                 allAttachments,
@@ -2898,10 +2831,10 @@ var HeaderMenu = ({
                 onClose: handleDocumentClose
               }
             ),
-            /* @__PURE__ */ jsx24(Typography12, { variant: "body2", children: "Documents" })
+            /* @__PURE__ */ jsx23(Typography12, { variant: "body2", children: "Documents" })
           ] }),
           /* @__PURE__ */ jsxs15(MenuItem, { onClick: handleParticipantsClick, children: [
-            /* @__PURE__ */ jsx24(
+            /* @__PURE__ */ jsx23(
               ParticipantsMenu,
               {
                 participants,
@@ -2910,7 +2843,7 @@ var HeaderMenu = ({
                 onClose: handleParticipantsClose
               }
             ),
-            /* @__PURE__ */ jsx24(Typography12, { variant: "body2", children: "Participants" })
+            /* @__PURE__ */ jsx23(Typography12, { variant: "body2", children: "Participants" })
           ] })
         ]
       }
@@ -2920,9 +2853,9 @@ var HeaderMenu = ({
 
 // src/client/components/ChatPopup/components/Header/index.tsx
 import OpenInFull from "@mui/icons-material/OpenInFull";
-import { styled as styled12 } from "@mui/material/styles";
-import { Fragment as Fragment6, jsx as jsx25, jsxs as jsxs16 } from "react/jsx-runtime";
-var HeaderContainer = styled12(Box27)(({ theme }) => ({
+import { styled as styled11 } from "@mui/material/styles";
+import { Fragment as Fragment6, jsx as jsx24, jsxs as jsxs16 } from "react/jsx-runtime";
+var HeaderContainer = styled11(Box26)(({ theme }) => ({
   padding: theme.spacing(1.5),
   borderBottom: `1px solid ${theme.palette.divider}`,
   background: theme.palette.background.paper,
@@ -2933,12 +2866,12 @@ var HeaderContainer = styled12(Box27)(({ theme }) => ({
   borderTopLeftRadius: "16px",
   borderTopRightRadius: "16px"
 }));
-var UserInfo = styled12(Box27)(({ theme }) => ({
+var UserInfo = styled11(Box26)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   gap: theme.spacing(1)
 }));
-var UserAvatar2 = styled12(Box27)(({ theme }) => ({
+var UserAvatar2 = styled11(Box26)(({ theme }) => ({
   width: 32,
   height: 32,
   borderRadius: "50%",
@@ -2956,13 +2889,13 @@ var UserAvatar2 = styled12(Box27)(({ theme }) => ({
     objectFit: "cover"
   }
 }));
-var UserName = styled12(Typography13)(({ theme }) => ({
+var UserName = styled11(Typography13)(({ theme }) => ({
   fontSize: "0.9rem",
   fontWeight: 600,
   margin: 0,
   lineHeight: 1.2
 }));
-var ActionButton = styled12(IconButton9)(({ theme }) => ({
+var ActionButton = styled11(IconButton9)(({ theme }) => ({
   color: theme.palette.text.secondary,
   padding: 0.5,
   "&:hover": {
@@ -2980,14 +2913,14 @@ var Header = ({
   allAttachments,
   conversationId
 }) => {
-  const [isDocumentsOpen, setIsDocumentsOpen] = useState10(false);
-  const [isParticipantsOpen, setIsParticipantsOpen] = useState10(false);
+  const [isDocumentsOpen, setIsDocumentsOpen] = useState9(false);
+  const [isParticipantsOpen, setIsParticipantsOpen] = useState9(false);
   const handleDocumentClose = () => setIsDocumentsOpen(false);
   const handleParticipantsClose = () => setIsParticipantsOpen(false);
   const renderActionButtons = () => {
     if (isExpanded && conversationId) {
       return /* @__PURE__ */ jsxs16(Fragment6, { children: [
-        /* @__PURE__ */ jsx25(ActionButton, { size: "small", onClick: () => setIsDocumentsOpen(true), children: /* @__PURE__ */ jsx25(
+        /* @__PURE__ */ jsx24(ActionButton, { size: "small", onClick: () => setIsDocumentsOpen(true), children: /* @__PURE__ */ jsx24(
           DocumentsMenu,
           {
             allAttachments,
@@ -2995,12 +2928,12 @@ var Header = ({
             onClose: handleDocumentClose
           }
         ) }),
-        /* @__PURE__ */ jsx25(
+        /* @__PURE__ */ jsx24(
           ActionButton,
           {
             size: "small",
             onClick: () => setIsParticipantsOpen(true),
-            children: /* @__PURE__ */ jsx25(
+            children: /* @__PURE__ */ jsx24(
               ParticipantsMenu,
               {
                 participants,
@@ -3014,7 +2947,7 @@ var Header = ({
       ] });
     }
     if (conversationId) {
-      return /* @__PURE__ */ jsx25(
+      return /* @__PURE__ */ jsx24(
         HeaderMenu,
         {
           allAttachments,
@@ -3027,12 +2960,12 @@ var Header = ({
   };
   return /* @__PURE__ */ jsxs16(HeaderContainer, { children: [
     /* @__PURE__ */ jsxs16(UserInfo, { children: [
-      avatar && /* @__PURE__ */ jsx25(UserAvatar2, { children: /* @__PURE__ */ jsx25("img", { src: avatar, alt: "title" }) }),
-      /* @__PURE__ */ jsx25(Box27, { children: /* @__PURE__ */ jsx25(UserName, { variant: "subtitle1", children: title }) })
+      avatar && /* @__PURE__ */ jsx24(UserAvatar2, { children: /* @__PURE__ */ jsx24("img", { src: avatar, alt: "title" }) }),
+      /* @__PURE__ */ jsx24(Box26, { children: /* @__PURE__ */ jsx24(UserName, { variant: "subtitle1", children: title }) })
     ] }),
-    /* @__PURE__ */ jsxs16(Box27, { sx: { display: "flex", gap: 1 }, children: [
+    /* @__PURE__ */ jsxs16(Box26, { sx: { display: "flex", gap: 1 }, children: [
       renderActionButtons(),
-      onExpand && /* @__PURE__ */ jsx25(
+      onExpand && /* @__PURE__ */ jsx24(
         ActionButton,
         {
           onClick: onExpand,
@@ -3040,10 +2973,10 @@ var Header = ({
           sx: {
             transform: isExpanded ? "rotate(180deg)" : "none"
           },
-          children: isExpanded ? /* @__PURE__ */ jsx25(CloseFullscreen, { fontSize: "small" }) : /* @__PURE__ */ jsx25(OpenInFull, { fontSize: "small" })
+          children: isExpanded ? /* @__PURE__ */ jsx24(CloseFullscreen, { fontSize: "small" }) : /* @__PURE__ */ jsx24(OpenInFull, { fontSize: "small" })
         }
       ),
-      /* @__PURE__ */ jsx25(ActionButton, { onClick: onClose, size: "small", children: /* @__PURE__ */ jsx25(Close, { fontSize: "small" }) })
+      /* @__PURE__ */ jsx24(ActionButton, { onClick: onClose, size: "small", children: /* @__PURE__ */ jsx24(Close, { fontSize: "small" }) })
     ] })
   ] });
 };
@@ -3051,8 +2984,8 @@ var Header_default = Header;
 
 // src/client/components/ChatPopup/style.ts
 import { Paper } from "@mui/material";
-import { styled as styled13 } from "@mui/material/styles";
-var StyledPaper = styled13(Paper, {
+import { styled as styled12 } from "@mui/material/styles";
+var StyledPaper = styled12(Paper, {
   shouldForwardProp: (prop) => prop !== "isClosing" && prop !== "isExpanded"
 })(
   ({ theme, isClosing, isExpanded }) => ({
@@ -3101,7 +3034,7 @@ var StyledPaper = styled13(Paper, {
 );
 
 // src/client/components/ChatPopup/index.tsx
-import { jsx as jsx26, jsxs as jsxs17 } from "react/jsx-runtime";
+import { jsx as jsx25, jsxs as jsxs17 } from "react/jsx-runtime";
 var ChatPopup = ({
   open,
   onClose,
@@ -3123,7 +3056,7 @@ var ChatPopup = ({
 }) => {
   const [isClosing, setIsClosing] = React13.useState(false);
   const [isExpanded, setIsExpanded] = React13.useState(false);
-  useEffect8(() => {
+  useEffect7(() => {
     if (!open) {
       setIsClosing(true);
       const timer = setTimeout(() => {
@@ -3143,7 +3076,7 @@ var ChatPopup = ({
         pointerEvents: !open && !isClosing ? "none" : "auto"
       },
       children: [
-        /* @__PURE__ */ jsx26(
+        /* @__PURE__ */ jsx25(
           Header_default,
           {
             title,
@@ -3162,7 +3095,7 @@ var ChatPopup = ({
             renderParticipant
           }
         ),
-        /* @__PURE__ */ jsx26(
+        /* @__PURE__ */ jsx25(
           Chat,
           {
             config,
@@ -3188,8 +3121,8 @@ import { Zoom, useTheme } from "@mui/material";
 
 // src/client/components/FloatingButton/styles.ts
 import { Fab } from "@mui/material";
-import { styled as styled14 } from "@mui/material/styles";
-var StyledFab = styled14(Fab)(({ theme }) => ({
+import { styled as styled13 } from "@mui/material/styles";
+var StyledFab = styled13(Fab)(({ theme }) => ({
   position: "fixed",
   bottom: theme.spacing(4),
   right: theme.spacing(4),
@@ -3197,7 +3130,7 @@ var StyledFab = styled14(Fab)(({ theme }) => ({
 }));
 
 // src/client/components/FloatingButton/index.tsx
-import { jsx as jsx27 } from "react/jsx-runtime";
+import { jsx as jsx26 } from "react/jsx-runtime";
 var FloatingButton = ({
   icon,
   onClick,
@@ -3207,7 +3140,7 @@ var FloatingButton = ({
   tooltip
 }) => {
   const theme = useTheme();
-  return /* @__PURE__ */ jsx27(
+  return /* @__PURE__ */ jsx26(
     Zoom,
     {
       in: true,
@@ -3219,7 +3152,7 @@ var FloatingButton = ({
         transitionDelay: "0ms"
       },
       unmountOnExit: true,
-      children: /* @__PURE__ */ jsx27(
+      children: /* @__PURE__ */ jsx26(
         StyledFab,
         {
           onClick,
@@ -3235,7 +3168,7 @@ var FloatingButton = ({
 };
 
 // src/client/components/ChatBubble/index.tsx
-import { Fragment as Fragment7, jsx as jsx28, jsxs as jsxs18 } from "react/jsx-runtime";
+import { Fragment as Fragment7, jsx as jsx27, jsxs as jsxs18 } from "react/jsx-runtime";
 var ChatBubble = ({
   onClick,
   unreadCount = 0,
@@ -3255,14 +3188,14 @@ var ChatBubble = ({
   totalMessages,
   buttonJoin
 }) => {
-  const [isOpen, setIsOpen] = useState11(false);
+  const [isOpen, setIsOpen] = useState10(false);
   const handleClick = () => {
     setIsOpen(!isOpen);
     onClick == null ? void 0 : onClick();
   };
-  const icon = unreadCount > 0 ? /* @__PURE__ */ jsx28(Badge, { badgeContent: unreadCount, color: "error", max: 99, children: /* @__PURE__ */ jsx28(ChatIcon, {}) }) : /* @__PURE__ */ jsx28(ChatIcon, {});
+  const icon = unreadCount > 0 ? /* @__PURE__ */ jsx27(Badge, { badgeContent: unreadCount, color: "error", max: 99, children: /* @__PURE__ */ jsx27(ChatIcon, {}) }) : /* @__PURE__ */ jsx27(ChatIcon, {});
   return /* @__PURE__ */ jsxs18(Fragment7, { children: [
-    /* @__PURE__ */ jsx28(
+    /* @__PURE__ */ jsx27(
       FloatingButton,
       {
         icon,
@@ -3276,7 +3209,7 @@ var ChatBubble = ({
         }
       }
     ),
-    /* @__PURE__ */ jsx28(
+    /* @__PURE__ */ jsx27(
       ChatPopup,
       {
         participants,

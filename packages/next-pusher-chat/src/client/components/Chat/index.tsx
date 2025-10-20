@@ -1,3 +1,4 @@
+"use client";
 import { ChatProvider, useChatContext } from "@/client/contexts/ChatContext";
 import {
   Content,
@@ -8,7 +9,7 @@ import {
 } from "./style";
 import React, { useEffect, useRef, useState } from "react";
 
-import { ChatActions } from "./components/ChatActions";
+// import { ChatActions } from "./components/ChatActions";
 import { ChatProps } from "../../types/chat";
 import { LoadMoreMessages } from "./components/LoadMoreMessages";
 import MessageInput from "./components/MessageInput";
@@ -26,7 +27,7 @@ const ChatConversationContent: React.FC = () => {
 
         <MessageList />
       </Content>
-      <ChatActions />
+      {/* <ChatActions /> */}
       <TypingIndicator />
       <MessageInput />
     </>

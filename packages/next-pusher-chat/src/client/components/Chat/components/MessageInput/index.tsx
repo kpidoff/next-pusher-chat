@@ -1,7 +1,8 @@
+"use client";
 import { InputContainer, StyledInput } from "./style";
 import React, { useEffect, useRef, useState } from "react";
 
-import { Box } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import { Button } from "@mui/material";
 import EmojiPickerComponent from "../EmojiPicker";
 import FileList from "../FileList";
@@ -185,7 +186,7 @@ export default function MessageInput() {
           maxRows={4}
         />
         <Button
-          loading={loadingSendMessage}
+          disabled={loadingSendMessage}
           size="small"
           onClick={handleSend}
           color="primary"
@@ -194,7 +195,11 @@ export default function MessageInput() {
             height: { xs: "36px", sm: "48px" },
           }}
         >
-          <SendIcon fontSize="small" />
+          {loadingSendMessage ? (
+            <CircularProgress size={20} color="inherit" />
+          ) : (
+            <SendIcon fontSize="small" />
+          )}
         </Button>
       </InputContainer>
     </Box>

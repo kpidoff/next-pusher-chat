@@ -2,5 +2,5 @@ interface EmojiPickerProps {
     onEmojiClick: (emoji: string) => void;
     disabled?: boolean;
 }
-declare const EmojiPickerComponent: React.FC<EmojiPickerProps>;
+declare function EmojiPickerComponent({ onEmojiClick, disabled, }: EmojiPickerProps): import("react/jsx-runtime").JSX.Element;
 export default EmojiPickerComponent;

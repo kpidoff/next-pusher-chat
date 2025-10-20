@@ -1,3 +1,4 @@
+"use client";
 import { Box, Chip } from "@mui/material";
 
 interface FileListProps {

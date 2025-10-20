@@ -1,3 +1,5 @@
+"use client";
+import React from "react";
 import { Box, IconButton, Popover } from "@mui/material";
 import EmojiPicker, { EmojiClickData } from "emoji-picker-react";
 
@@ -9,10 +11,10 @@ interface EmojiPickerProps {
   disabled?: boolean;
 }
 
-const EmojiPickerComponent: React.FC<EmojiPickerProps> = ({
+function EmojiPickerComponent({
   onEmojiClick,
   disabled = false,
-}) => {
+}: EmojiPickerProps) {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -67,6 +69,6 @@ const EmojiPickerComponent: React.FC<EmojiPickerProps> = ({
       </Popover>
     </Box>
   );
-};
+}
 
 export default EmojiPickerComponent;

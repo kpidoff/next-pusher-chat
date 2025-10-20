@@ -1,3 +1,4 @@
+"use client";
 import { LoadMoreButton, LoadMoreContainer } from "./style";
 
 import { CircularProgress } from "@mui/material";

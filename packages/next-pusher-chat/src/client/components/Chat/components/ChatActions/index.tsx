@@ -1,3 +1,4 @@
+"use client";
 import { ActionsContainer, ScrollButton } from "./style";
 import { useEffect, useState } from "react";
 
@@ -6,7 +7,10 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useChatContext } from "@/client/contexts/ChatContext";
 
 export const ChatActions = () => {
-  const { scrollManager } = useChatContext();
+  const context = useChatContext();
+  if (!context) return null;
+  
+  const { scrollManager } = context;
   const { scrollToBottom, isAtBottom } = scrollManager;
   const [showButton, setShowButton] = useState(false);
 
