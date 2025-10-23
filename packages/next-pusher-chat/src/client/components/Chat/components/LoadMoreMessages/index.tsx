@@ -1,12 +1,10 @@
 "use client";
 import { LoadMoreButton, LoadMoreContainer } from "./style";
 
-import { CircularProgress } from "@mui/material";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useChatContext } from "@/client/contexts/ChatContext";
 import { useRef } from "react";
 
-export const LoadMoreMessages = () => {
+const LoadMoreMessages = () => {
   const {
     isLoading,
     loadingMore,
@@ -55,12 +53,11 @@ export const LoadMoreMessages = () => {
         variant="outlined"
         onClick={handleLoadMore}
         disabled={loadingMore}
-        startIcon={
-          loadingMore ? <CircularProgress size={20} /> : <KeyboardArrowUpIcon />
-        }
       >
         {loadingMore ? "Chargement..." : "Messages plus anciens"}
       </LoadMoreButton>
     </LoadMoreContainer>
   );
 };
+
+export default LoadMoreMessages;

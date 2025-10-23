@@ -1,9 +1,10 @@
 "use client";
 import { Box, CircularProgress, IconButton } from "@mui/material";
 import { useRef, useState } from "react";
+import { Mic, Square } from "lucide-react";
 
-import MicIcon from "@mui/icons-material/Mic";
-import StopIcon from "@mui/icons-material/Stop";
+// import MicIcon from "@mui/icons-material/Mic";
+// import StopIcon from "@mui/icons-material/Stop";
 
 interface VoiceRecorderProps {
   onRecordingComplete: (audioBlob: Blob) => void;
@@ -83,7 +84,7 @@ export function VoiceRecorder({
         }}
         disabled={disabled}
       >
-        {isRecording ? <StopIcon /> : <MicIcon />}
+        {isRecording ? <Square size={20} /> : <Mic size={20} />}
       </IconButton>
       {isRecording && (
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>

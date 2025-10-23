@@ -6,8 +6,9 @@ import { Box, CircularProgress } from "@mui/material";
 import { Button } from "@mui/material";
 import EmojiPickerComponent from "../EmojiPicker";
 import FileList from "../FileList";
-import { FilePicker } from "../FilePicker";
-import SendIcon from "@mui/icons-material/Send";
+import FilePicker from "../FilePicker";
+import { Send } from "lucide-react";
+// import SendIcon from "@mui/icons-material/Send";
 import { VoiceRecorder } from "../VoiceRecorder";
 import { useChatContext } from "@/client/contexts/ChatContext";
 
@@ -159,12 +160,12 @@ export default function MessageInput() {
             disabled={loadingSendMessage}
           />
         )}
-        {config?.activeFile && (
+         {config?.activeFile && (
           <FilePicker
             onFilesSelect={handleFilesSelect}
             disabled={loadingSendMessage}
           />
-        )}
+        )} 
         {config?.activeVoice && (
           <VoiceRecorder
             onRecordingComplete={handleVoiceRecording}
@@ -198,7 +199,7 @@ export default function MessageInput() {
           {loadingSendMessage ? (
             <CircularProgress size={20} color="inherit" />
           ) : (
-            <SendIcon fontSize="small" />
+            <Send size={20} />
           )}
         </Button>
       </InputContainer>

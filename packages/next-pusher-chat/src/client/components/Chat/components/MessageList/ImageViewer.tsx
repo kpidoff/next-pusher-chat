@@ -6,11 +6,8 @@ import {
   ViewerImageContainer,
 } from "./styles";
 
-import CloseIcon from "@mui/icons-material/Close";
-import DownloadIcon from "@mui/icons-material/Download";
+import { X, Download, ZoomIn, ZoomOut } from "lucide-react";
 import React from "react";
-import ZoomInIcon from "@mui/icons-material/ZoomIn";
-import ZoomOutIcon from "@mui/icons-material/ZoomOut";
 
 interface ImageViewerProps {
   open: boolean;
@@ -62,22 +59,22 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
         <ControlsContainer>
           <Tooltip title="Zoom avant">
             <IconButton onClick={handleZoomIn} sx={{ color: "white" }}>
-              <ZoomInIcon />
+              <ZoomIn size={20} />
             </IconButton>
           </Tooltip>
           <Tooltip title="Zoom arrière">
             <IconButton onClick={handleZoomOut} sx={{ color: "white" }}>
-              <ZoomOutIcon />
+              <ZoomOut size={20} />
             </IconButton>
           </Tooltip>
           <Tooltip title="Télécharger">
             <IconButton onClick={handleDownload} sx={{ color: "white" }}>
-              <DownloadIcon />
+              <Download size={20} />
             </IconButton>
           </Tooltip>
           <Tooltip title="Fermer">
             <IconButton onClick={handleClose} sx={{ color: "white" }}>
-              <CloseIcon />
+              <X size={20} />
             </IconButton>
           </Tooltip>
         </ControlsContainer>

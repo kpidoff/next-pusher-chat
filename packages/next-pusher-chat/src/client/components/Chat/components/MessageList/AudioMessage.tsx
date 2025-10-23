@@ -1,9 +1,7 @@
 import { AudioContainer, AudioProgress, AudioProgressBar } from "./styles";
 import { Box, IconButton, Typography } from "@mui/material";
 import { useRef, useState } from "react";
-
-import PauseIcon from "@mui/icons-material/Pause";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import { Pause, Play } from "lucide-react";
 
 const formatTime = (seconds: number) => {
   if (!isFinite(seconds) || isNaN(seconds)) {
@@ -91,7 +89,7 @@ export const AudioMessage: React.FC<AudioMessageProps> = ({ url }) => {
           height: { xs: 36, sm: 40 },
         }}
       >
-        {isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
+        {isPlaying ? <Pause size={24} /> : <Play size={24} />}
       </IconButton>
       <Box sx={{ flex: 1, minWidth: 0, pr: 1, overflow: "hidden" }}>
         <AudioProgress>
