@@ -2,8 +2,9 @@
 import React from "react";
 import { Box, IconButton, Popover } from "@mui/material";
 import EmojiPicker, { EmojiClickData } from "emoji-picker-react";
+import { Smile } from "lucide-react";
 
-import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
+// import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
 import { useState } from "react";
 
 interface EmojiPickerProps {
@@ -45,7 +46,7 @@ function EmojiPickerComponent({
           },
         }}
       >
-        <SentimentSatisfiedAltIcon />
+        <Smile size={20} />
       </IconButton>
       <Popover
         open={open}

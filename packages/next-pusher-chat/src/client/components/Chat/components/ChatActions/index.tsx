@@ -3,7 +3,7 @@ import { ActionsContainer, ScrollButton } from "./style";
 import { useEffect, useState } from "react";
 
 import { Fade } from "@mui/material";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { ChevronDown } from "lucide-react";
 import { useChatContext } from "@/client/contexts/ChatContext";
 
 export const ChatActions = () => {
@@ -41,7 +41,7 @@ export const ChatActions = () => {
           onClick={() => scrollToBottom("smooth")}
           variant="contained"
         >
-          <KeyboardArrowDownIcon />
+          <ChevronDown size={20} />
         </ScrollButton>
       </Fade>
     </ActionsContainer>

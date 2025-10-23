@@ -1022,8 +1022,6 @@ var LoadMoreButton = styled2(Button)(({ theme }) => ({
 }));
 
 // src/client/components/Chat/components/LoadMoreMessages/index.tsx
-import { CircularProgress } from "@mui/material";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useRef as useRef4 } from "react";
 import { jsx as jsx3 } from "react/jsx-runtime";
 var LoadMoreMessages = () => {
@@ -1063,11 +1061,11 @@ var LoadMoreMessages = () => {
       variant: "outlined",
       onClick: handleLoadMore,
       disabled: loadingMore,
-      startIcon: loadingMore ? /* @__PURE__ */ jsx3(CircularProgress, { size: 20 }) : /* @__PURE__ */ jsx3(KeyboardArrowUpIcon, {}),
       children: loadingMore ? "Chargement..." : "Messages plus anciens"
     }
   ) });
 };
+var LoadMoreMessages_default = LoadMoreMessages;
 
 // src/client/components/Chat/components/MessageInput/style.ts
 import { Box as Box3, InputBase } from "@mui/material";
@@ -1100,13 +1098,13 @@ var StyledInput = styled3(InputBase)(({ theme }) => ({
 
 // src/client/components/Chat/components/MessageInput/index.tsx
 import { useEffect as useEffect5, useRef as useRef7, useState as useState5 } from "react";
-import { Box as Box8, CircularProgress as CircularProgress3 } from "@mui/material";
+import { Box as Box8, CircularProgress as CircularProgress2 } from "@mui/material";
 import { Button as Button2 } from "@mui/material";
 
 // src/client/components/Chat/components/EmojiPicker/index.tsx
 import { Box as Box4, IconButton, Popover } from "@mui/material";
 import EmojiPicker from "emoji-picker-react";
-import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
+import { Smile } from "lucide-react";
 import { useState as useState2 } from "react";
 import { jsx as jsx4, jsxs } from "react/jsx-runtime";
 function EmojiPickerComponent({
@@ -1138,7 +1136,7 @@ function EmojiPickerComponent({
             color: "primary.main"
           }
         },
-        children: /* @__PURE__ */ jsx4(SentimentSatisfiedAltIcon, {})
+        children: /* @__PURE__ */ jsx4(Smile, { size: 20 })
       }
     ),
     /* @__PURE__ */ jsx4(
@@ -1219,7 +1217,7 @@ var FileList_default = FileList;
 // src/client/components/Chat/components/FilePicker/index.tsx
 import { Box as Box6, IconButton as IconButton2 } from "@mui/material";
 import { useRef as useRef5, useState as useState3 } from "react";
-import AttachFileIcon from "@mui/icons-material/AttachFile";
+import { Paperclip } from "lucide-react";
 import { jsx as jsx6, jsxs as jsxs2 } from "react/jsx-runtime";
 function FilePicker({
   onFilesSelect,
@@ -1266,20 +1264,19 @@ function FilePicker({
           }
         },
         disabled,
-        children: /* @__PURE__ */ jsx6(AttachFileIcon, {})
+        children: /* @__PURE__ */ jsx6(Paperclip, { size: 20 })
       }
     )
   ] });
 }
 
 // src/client/components/Chat/components/MessageInput/index.tsx
-import SendIcon from "@mui/icons-material/Send";
+import { Send } from "lucide-react";
 
 // src/client/components/Chat/components/VoiceRecorder/index.tsx
-import { Box as Box7, CircularProgress as CircularProgress2, IconButton as IconButton3 } from "@mui/material";
+import { Box as Box7, CircularProgress, IconButton as IconButton3 } from "@mui/material";
 import { useRef as useRef6, useState as useState4 } from "react";
-import MicIcon from "@mui/icons-material/Mic";
-import StopIcon from "@mui/icons-material/Stop";
+import { Mic, Square } from "lucide-react";
 import { jsx as jsx7, jsxs as jsxs3 } from "react/jsx-runtime";
 function VoiceRecorder({
   onRecordingComplete,
@@ -1345,11 +1342,11 @@ function VoiceRecorder({
           }
         },
         disabled,
-        children: isRecording ? /* @__PURE__ */ jsx7(StopIcon, {}) : /* @__PURE__ */ jsx7(MicIcon, {})
+        children: isRecording ? /* @__PURE__ */ jsx7(Square, { size: 20 }) : /* @__PURE__ */ jsx7(Mic, { size: 20 })
       }
     ),
     isRecording && /* @__PURE__ */ jsxs3(Box7, { sx: { display: "flex", alignItems: "center", gap: 1 }, children: [
-      /* @__PURE__ */ jsx7(CircularProgress2, { size: 16, color: "error" }),
+      /* @__PURE__ */ jsx7(CircularProgress, { size: 16, color: "error" }),
       /* @__PURE__ */ jsx7("span", { style: { fontSize: "0.8rem", color: "error.main" }, children: formatTime2(recordingTime) })
     ] })
   ] });
@@ -1510,7 +1507,7 @@ function MessageInput() {
             minWidth: { xs: "36px", sm: "48px" },
             height: { xs: "36px", sm: "48px" }
           },
-          children: loadingSendMessage ? /* @__PURE__ */ jsx8(CircularProgress3, { size: 20, color: "inherit" }) : /* @__PURE__ */ jsx8(SendIcon, { fontSize: "small" })
+          children: loadingSendMessage ? /* @__PURE__ */ jsx8(CircularProgress2, { size: 20, color: "inherit" }) : /* @__PURE__ */ jsx8(Send, { size: 20 })
         }
       )
     ] })
@@ -1519,7 +1516,7 @@ function MessageInput() {
 
 // src/client/components/Chat/components/MessageList/index.tsx
 import "moment/locale/fr";
-import { Box as Box18, CircularProgress as CircularProgress4, Typography as Typography8 } from "@mui/material";
+import { Box as Box18, CircularProgress as CircularProgress3, Typography as Typography8 } from "@mui/material";
 
 // src/client/components/Chat/components/MessageList/styles.ts
 import { Box as Box9, Dialog, Link, Typography } from "@mui/material";
@@ -2266,7 +2263,7 @@ var MessageList = () => {
           height: "100%",
           minHeight: "200px"
         },
-        children: /* @__PURE__ */ jsx17(CircularProgress4, {})
+        children: /* @__PURE__ */ jsx17(CircularProgress3, {})
       }
     );
   }
@@ -2433,56 +2430,125 @@ var TypingIndicator = () => {
   ) }) });
 };
 
+// src/client/components/Chat/components/ChatActions/style.ts
+import { Box as Box20, Button as Button3 } from "@mui/material";
+import { styled as styled8 } from "@mui/material/styles";
+var ActionsContainer = styled8(Box20)(({ theme }) => ({
+  position: "relative",
+  display: "flex",
+  flexDirection: "column",
+  gap: theme.spacing(1),
+  zIndex: 1
+}));
+var ScrollButton = styled8(Button3)(({ theme }) => ({
+  position: "absolute",
+  bottom: theme.spacing(2),
+  right: theme.spacing(2),
+  backgroundColor: theme.palette.primary.main,
+  color: theme.palette.primary.contrastText,
+  "&:hover": {
+    backgroundColor: theme.palette.primary.dark
+  },
+  boxShadow: theme.shadows[2],
+  width: "40px",
+  height: "40px",
+  minWidth: "40px",
+  padding: 0,
+  borderRadius: "50%",
+  backdropFilter: "blur(8px)",
+  border: `1px solid ${theme.palette.primary.dark}33`,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center"
+}));
+
+// src/client/components/Chat/components/ChatActions/index.tsx
+import { useEffect as useEffect7, useState as useState8 } from "react";
+import { Fade } from "@mui/material";
+import { ChevronDown } from "lucide-react";
+import { jsx as jsx19 } from "react/jsx-runtime";
+var ChatActions = () => {
+  const context = useChatContext();
+  if (!context) return null;
+  const { scrollManager } = context;
+  const { scrollToBottom, isAtBottom } = scrollManager;
+  const [showButton, setShowButton] = useState8(false);
+  useEffect7(() => {
+    let timeoutId;
+    if (!isAtBottom) {
+      timeoutId = setTimeout(() => {
+        setShowButton(true);
+      }, 500);
+    } else {
+      timeoutId = setTimeout(() => {
+        setShowButton(false);
+      }, 100);
+    }
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [isAtBottom]);
+  return /* @__PURE__ */ jsx19(ActionsContainer, { children: /* @__PURE__ */ jsx19(Fade, { in: showButton, children: /* @__PURE__ */ jsx19(
+    ScrollButton,
+    {
+      onClick: () => scrollToBottom("smooth"),
+      variant: "contained",
+      children: /* @__PURE__ */ jsx19(ChevronDown, { size: 20 })
+    }
+  ) }) });
+};
+
 // src/client/components/Chat/index.tsx
-import { Fragment as Fragment2, jsx as jsx19, jsxs as jsxs12 } from "react/jsx-runtime";
+import { Fragment as Fragment2, jsx as jsx20, jsxs as jsxs12 } from "react/jsx-runtime";
 var ChatConversationContent = () => {
   const { scrollManager } = useChatContext();
   const { contentRef } = scrollManager;
   return /* @__PURE__ */ jsxs12(Fragment2, { children: [
     /* @__PURE__ */ jsxs12(Content, { ref: contentRef, children: [
-      /* @__PURE__ */ jsx19(LoadMoreMessages, {}),
-      /* @__PURE__ */ jsx19(MessageList, {})
+      /* @__PURE__ */ jsx20(LoadMoreMessages_default, {}),
+      /* @__PURE__ */ jsx20(MessageList, {})
     ] }),
-    /* @__PURE__ */ jsx19(TypingIndicator, {}),
-    /* @__PURE__ */ jsx19(MessageInput, {})
+    /* @__PURE__ */ jsx20(ChatActions, {}),
+    /* @__PURE__ */ jsx20(TypingIndicator, {}),
+    /* @__PURE__ */ jsx20(MessageInput, {})
   ] });
 };
 var ChatNoConversationContent = ({ buttonJoin }) => {
-  return /* @__PURE__ */ jsx19(Fragment2, { children: /* @__PURE__ */ jsx19(Content, { children: buttonJoin ? buttonJoin : /* @__PURE__ */ jsxs12(WaitingMessageContainer, { children: [
-    /* @__PURE__ */ jsx19(WaitingMessageEmoji, { children: "\u{1F4AD}" }),
-    /* @__PURE__ */ jsx19(WaitingMessageTitle, { children: "En attente de conversation" }),
-    /* @__PURE__ */ jsx19(WaitingMessageText, { children: "La conversation n'est pas encore active. Revenez bient\xF4t pour discuter !" })
+  return /* @__PURE__ */ jsx20(Fragment2, { children: /* @__PURE__ */ jsx20(Content, { children: buttonJoin ? buttonJoin : /* @__PURE__ */ jsxs12(WaitingMessageContainer, { children: [
+    /* @__PURE__ */ jsx20(WaitingMessageEmoji, { children: "\u{1F4AD}" }),
+    /* @__PURE__ */ jsx20(WaitingMessageTitle, { children: "En attente de conversation" }),
+    /* @__PURE__ */ jsx20(WaitingMessageText, { children: "La conversation n'est pas encore active. Revenez bient\xF4t pour discuter !" })
   ] }) }) });
 };
 var Chat = (props) => {
   const _a = props, { conversationId, buttonJoin } = _a, rest = __objRest(_a, ["conversationId", "buttonJoin"]);
   if (conversationId) {
-    return /* @__PURE__ */ jsx19(ChatProvider, __spreadProps(__spreadValues({}, rest), { conversationId, children: /* @__PURE__ */ jsx19(ChatConversationContent, {}) }));
+    return /* @__PURE__ */ jsx20(ChatProvider, __spreadProps(__spreadValues({}, rest), { conversationId, children: /* @__PURE__ */ jsx20(ChatConversationContent, {}) }));
   }
-  return /* @__PURE__ */ jsx19(ChatNoConversationContent, { buttonJoin });
+  return /* @__PURE__ */ jsx20(ChatNoConversationContent, { buttonJoin });
 };
 
 // src/client/components/ChatBubble/index.tsx
-import { useState as useState10 } from "react";
+import { useState as useState11 } from "react";
 import { Badge } from "@mui/material";
 import ChatIcon from "@mui/icons-material/Chat";
 
 // src/client/components/ChatPopup/index.tsx
-import React13, { useEffect as useEffect7 } from "react";
+import React13, { useEffect as useEffect8 } from "react";
 
 // src/client/components/ChatPopup/components/Header/index.tsx
-import { Box as Box26, IconButton as IconButton9, Typography as Typography13 } from "@mui/material";
-import { useState as useState9 } from "react";
+import { Box as Box27, IconButton as IconButton9, Typography as Typography13 } from "@mui/material";
+import { useState as useState10 } from "react";
 import Close from "@mui/icons-material/Close";
 import CloseFullscreen from "@mui/icons-material/CloseFullscreen";
 
 // src/client/components/ChatPopup/components/Header/DocumentsMenu/index.tsx
-import { Box as Box22, IconButton as IconButton6, Typography as Typography10 } from "@mui/material";
+import { Box as Box23, IconButton as IconButton6, Typography as Typography10 } from "@mui/material";
 
 // src/client/components/ChatPopup/components/Header/DocumentsMenu/styles.ts
-import { Box as Box20, List, Popover as Popover2 } from "@mui/material";
-import { styled as styled8 } from "@mui/material/styles";
-var StyledPopover = styled8(Popover2)(({ theme }) => ({
+import { Box as Box21, List, Popover as Popover2 } from "@mui/material";
+import { styled as styled9 } from "@mui/material/styles";
+var StyledPopover = styled9(Popover2)(({ theme }) => ({
   "& .MuiPaper-root": {
     width: 280,
     maxHeight: 360,
@@ -2493,7 +2559,7 @@ var StyledPopover = styled8(Popover2)(({ theme }) => ({
     flexDirection: "column"
   }
 }));
-var MenuHeader = styled8(Box20)(({ theme }) => ({
+var MenuHeader = styled9(Box21)(({ theme }) => ({
   padding: theme.spacing(1.5),
   borderBottom: `1px solid ${theme.palette.divider}`,
   display: "flex",
@@ -2505,7 +2571,7 @@ var MenuHeader = styled8(Box20)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
   zIndex: 1
 }));
-var StyledList = styled8(List)(({ theme }) => ({
+var StyledList = styled9(List)(({ theme }) => ({
   flex: 1,
   overflow: "auto",
   py: 0
@@ -2516,9 +2582,9 @@ import { useRef as useRef9 } from "react";
 import CloseIcon2 from "@mui/icons-material/Close";
 
 // src/client/components/FileManager/styles.ts
-import { Box as Box21 } from "@mui/material";
-import { styled as styled9 } from "@mui/material/styles";
-var FileContainer2 = styled9(Box21)(({ theme }) => ({
+import { Box as Box22 } from "@mui/material";
+import { styled as styled10 } from "@mui/material/styles";
+var FileContainer2 = styled10(Box22)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(1),
@@ -2533,7 +2599,7 @@ var FileContainer2 = styled9(Box21)(({ theme }) => ({
 }));
 
 // src/client/components/FileManager/FileItem.tsx
-import { jsx as jsx20 } from "react/jsx-runtime";
+import { jsx as jsx21 } from "react/jsx-runtime";
 var FileItem = ({ file, onClick }) => {
   const handleClick = (e) => {
     if (isAudio(file.name)) {
@@ -2545,12 +2611,12 @@ var FileItem = ({ file, onClick }) => {
       window.open(file.url, "_blank");
     }
   };
-  return /* @__PURE__ */ jsx20(FileContainer2, { onClick: handleClick, children: isImage(file.name) ? /* @__PURE__ */ jsx20(ImageFile, { url: file.url, name: file.name }) : isAudio(file.name) ? /* @__PURE__ */ jsx20(AudioMessage, { url: file.url }) : /* @__PURE__ */ jsx20(RegularFile, { url: file.url, name: file.name }) });
+  return /* @__PURE__ */ jsx21(FileContainer2, { onClick: handleClick, children: isImage(file.name) ? /* @__PURE__ */ jsx21(ImageFile, { url: file.url, name: file.name }) : isAudio(file.name) ? /* @__PURE__ */ jsx21(AudioMessage, { url: file.url }) : /* @__PURE__ */ jsx21(RegularFile, { url: file.url, name: file.name }) });
 };
 
 // src/client/components/ChatPopup/components/Header/DocumentsMenu/index.tsx
 import InsertDriveFileIcon2 from "@mui/icons-material/InsertDriveFile";
-import { Fragment as Fragment3, jsx as jsx21, jsxs as jsxs13 } from "react/jsx-runtime";
+import { Fragment as Fragment3, jsx as jsx22, jsxs as jsxs13 } from "react/jsx-runtime";
 var DocumentsMenu = ({
   allAttachments,
   open,
@@ -2558,7 +2624,7 @@ var DocumentsMenu = ({
 }) => {
   const anchorRef = useRef9(null);
   return /* @__PURE__ */ jsxs13(Fragment3, { children: [
-    /* @__PURE__ */ jsx21(
+    /* @__PURE__ */ jsx22(
       IconButton6,
       {
         ref: anchorRef,
@@ -2570,7 +2636,7 @@ var DocumentsMenu = ({
             color: (theme) => theme.palette.primary.main
           }
         },
-        children: /* @__PURE__ */ jsx21(InsertDriveFileIcon2, { fontSize: "small" })
+        children: /* @__PURE__ */ jsx22(InsertDriveFileIcon2, { fontSize: "small" })
       }
     ),
     /* @__PURE__ */ jsxs13(
@@ -2590,17 +2656,17 @@ var DocumentsMenu = ({
         onClick: (e) => e.stopPropagation(),
         children: [
           /* @__PURE__ */ jsxs13(MenuHeader, { children: [
-            /* @__PURE__ */ jsxs13(Box22, { sx: { display: "flex", alignItems: "center", gap: 1 }, children: [
-              /* @__PURE__ */ jsx21(InsertDriveFileIcon2, { fontSize: "small", color: "primary" }),
+            /* @__PURE__ */ jsxs13(Box23, { sx: { display: "flex", alignItems: "center", gap: 1 }, children: [
+              /* @__PURE__ */ jsx22(InsertDriveFileIcon2, { fontSize: "small", color: "primary" }),
               /* @__PURE__ */ jsxs13(Typography10, { variant: "subtitle2", fontWeight: "bold", children: [
                 "Documents (",
                 (allAttachments == null ? void 0 : allAttachments.length) || 0,
                 ")"
               ] })
             ] }),
-            /* @__PURE__ */ jsx21(IconButton6, { size: "small", onClick: onClose, children: /* @__PURE__ */ jsx21(CloseIcon2, { fontSize: "small" }) })
+            /* @__PURE__ */ jsx22(IconButton6, { size: "small", onClick: onClose, children: /* @__PURE__ */ jsx22(CloseIcon2, { fontSize: "small" }) })
           ] }),
-          /* @__PURE__ */ jsx21(StyledList, { children: (allAttachments == null ? void 0 : allAttachments.length) === 0 ? /* @__PURE__ */ jsx21(Box22, { sx: { p: 2, textAlign: "center" }, children: /* @__PURE__ */ jsx21(Typography10, { variant: "body2", color: "text.secondary", children: "Aucun document partag\xE9 dans cette conversation" }) }) : allAttachments == null ? void 0 : allAttachments.map((file, index) => /* @__PURE__ */ jsx21(FileItem, { file }, index)) })
+          /* @__PURE__ */ jsx22(StyledList, { children: (allAttachments == null ? void 0 : allAttachments.length) === 0 ? /* @__PURE__ */ jsx22(Box23, { sx: { p: 2, textAlign: "center" }, children: /* @__PURE__ */ jsx22(Typography10, { variant: "body2", color: "text.secondary", children: "Aucun document partag\xE9 dans cette conversation" }) }) : allAttachments == null ? void 0 : allAttachments.map((file, index) => /* @__PURE__ */ jsx22(FileItem, { file }, index)) })
         ]
       }
     )
@@ -2615,12 +2681,12 @@ import {
   Tooltip as Tooltip4,
   Typography as Typography12
 } from "@mui/material";
-import { useState as useState8 } from "react";
+import { useState as useState9 } from "react";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 // src/client/components/ChatPopup/components/Header/ParticipantsMenu/index.tsx
 import {
-  Box as Box24,
+  Box as Box25,
   IconButton as IconButton7,
   ListItemIcon,
   ListItemText,
@@ -2628,9 +2694,9 @@ import {
 } from "@mui/material";
 
 // src/client/components/ChatPopup/components/Header/ParticipantsMenu/styles.ts
-import { Box as Box23, List as List2, ListItem, Popover as Popover3 } from "@mui/material";
-import { styled as styled10 } from "@mui/material/styles";
-var StyledPopover2 = styled10(Popover3)(({ theme }) => ({
+import { Box as Box24, List as List2, ListItem, Popover as Popover3 } from "@mui/material";
+import { styled as styled11 } from "@mui/material/styles";
+var StyledPopover2 = styled11(Popover3)(({ theme }) => ({
   "& .MuiPaper-root": {
     width: 280,
     maxHeight: 360,
@@ -2641,7 +2707,7 @@ var StyledPopover2 = styled10(Popover3)(({ theme }) => ({
     flexDirection: "column"
   }
 }));
-var MenuHeader2 = styled10(Box23)(({ theme }) => ({
+var MenuHeader2 = styled11(Box24)(({ theme }) => ({
   padding: theme.spacing(1.5),
   borderBottom: `1px solid ${theme.palette.divider}`,
   display: "flex",
@@ -2653,7 +2719,7 @@ var MenuHeader2 = styled10(Box23)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
   zIndex: 1
 }));
-var ParticipantAvatar = styled10(Box23)(({ theme }) => ({
+var ParticipantAvatar = styled11(Box24)(({ theme }) => ({
   width: 32,
   height: 32,
   borderRadius: "50%",
@@ -2671,13 +2737,13 @@ var ParticipantAvatar = styled10(Box23)(({ theme }) => ({
     objectFit: "cover"
   }
 }));
-var StyledListItem = styled10(ListItem)(({ theme }) => ({
+var StyledListItem = styled11(ListItem)(({ theme }) => ({
   padding: theme.spacing(0.75, 1.5),
   "&:hover": {
     backgroundColor: theme.palette.action.hover
   }
 }));
-var StyledList2 = styled10(List2)(({ theme }) => ({
+var StyledList2 = styled11(List2)(({ theme }) => ({
   flex: 1,
   overflow: "auto",
   py: 0
@@ -2686,7 +2752,7 @@ var StyledList2 = styled10(List2)(({ theme }) => ({
 // src/client/components/ChatPopup/components/Header/ParticipantsMenu/index.tsx
 import { useRef as useRef10 } from "react";
 import GroupIcon from "@mui/icons-material/Group";
-import { Fragment as Fragment4, jsx as jsx22, jsxs as jsxs14 } from "react/jsx-runtime";
+import { Fragment as Fragment4, jsx as jsx23, jsxs as jsxs14 } from "react/jsx-runtime";
 var ParticipantsMenu = ({
   participants,
   renderParticipant,
@@ -2695,7 +2761,7 @@ var ParticipantsMenu = ({
 }) => {
   const anchorRef = useRef10(null);
   return /* @__PURE__ */ jsxs14(Fragment4, { children: [
-    /* @__PURE__ */ jsx22(
+    /* @__PURE__ */ jsx23(
       IconButton7,
       {
         ref: anchorRef,
@@ -2707,7 +2773,7 @@ var ParticipantsMenu = ({
             color: (theme) => theme.palette.primary.main
           }
         },
-        children: /* @__PURE__ */ jsx22(GroupIcon, { fontSize: "small" })
+        children: /* @__PURE__ */ jsx23(GroupIcon, { fontSize: "small" })
       }
     ),
     /* @__PURE__ */ jsxs14(
@@ -2726,16 +2792,16 @@ var ParticipantsMenu = ({
         },
         onClick: (e) => e.stopPropagation(),
         children: [
-          /* @__PURE__ */ jsx22(MenuHeader2, { children: /* @__PURE__ */ jsxs14(Box24, { sx: { display: "flex", alignItems: "center", gap: 1 }, children: [
-            /* @__PURE__ */ jsx22(GroupIcon, { fontSize: "small", color: "primary" }),
+          /* @__PURE__ */ jsx23(MenuHeader2, { children: /* @__PURE__ */ jsxs14(Box25, { sx: { display: "flex", alignItems: "center", gap: 1 }, children: [
+            /* @__PURE__ */ jsx23(GroupIcon, { fontSize: "small", color: "primary" }),
             /* @__PURE__ */ jsxs14(Typography11, { variant: "subtitle2", fontWeight: "bold", children: [
               "Participants (",
               participants.length,
               ")"
             ] })
           ] }) }),
-          /* @__PURE__ */ jsx22(StyledList2, { children: participants.map((participant) => /* @__PURE__ */ jsxs14(StyledListItem, { children: [
-            /* @__PURE__ */ jsx22(ListItemIcon, { sx: { minWidth: 36 }, children: renderParticipant ? renderParticipant(participant) : /* @__PURE__ */ jsx22(ParticipantAvatar, { children: /* @__PURE__ */ jsx22(
+          /* @__PURE__ */ jsx23(StyledList2, { children: participants.map((participant) => /* @__PURE__ */ jsxs14(StyledListItem, { children: [
+            /* @__PURE__ */ jsx23(ListItemIcon, { sx: { minWidth: 36 }, children: renderParticipant ? renderParticipant(participant) : /* @__PURE__ */ jsx23(ParticipantAvatar, { children: /* @__PURE__ */ jsx23(
               Typography11,
               {
                 variant: "caption",
@@ -2743,10 +2809,10 @@ var ParticipantsMenu = ({
                 children: participant.name.split(" ").map((word) => word[0]).join("").toUpperCase().slice(0, 2)
               }
             ) }) }),
-            /* @__PURE__ */ jsx22(
+            /* @__PURE__ */ jsx23(
               ListItemText,
               {
-                primary: /* @__PURE__ */ jsx22(Typography11, { variant: "body2", fontWeight: 500, children: participant.name })
+                primary: /* @__PURE__ */ jsx23(Typography11, { variant: "body2", fontWeight: 500, children: participant.name })
               }
             )
           ] }, participant.id)) })
@@ -2757,15 +2823,15 @@ var ParticipantsMenu = ({
 };
 
 // src/client/components/ChatPopup/components/Header/HeaderMenu.tsx
-import { Fragment as Fragment5, jsx as jsx23, jsxs as jsxs15 } from "react/jsx-runtime";
+import { Fragment as Fragment5, jsx as jsx24, jsxs as jsxs15 } from "react/jsx-runtime";
 var HeaderMenu = ({
   participants,
   renderParticipant,
   allAttachments
 }) => {
-  const [anchorEl, setAnchorEl] = useState8(null);
-  const [isDocumentsOpen, setIsDocumentsOpen] = useState8(false);
-  const [isParticipantsOpen, setIsParticipantsOpen] = useState8(false);
+  const [anchorEl, setAnchorEl] = useState9(null);
+  const [isDocumentsOpen, setIsDocumentsOpen] = useState9(false);
+  const [isParticipantsOpen, setIsParticipantsOpen] = useState9(false);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -2791,7 +2857,7 @@ var HeaderMenu = ({
     setIsParticipantsOpen(false);
   };
   return /* @__PURE__ */ jsxs15(Fragment5, { children: [
-    /* @__PURE__ */ jsx23(Tooltip4, { title: "Options", children: /* @__PURE__ */ jsx23(
+    /* @__PURE__ */ jsx24(Tooltip4, { title: "Options", children: /* @__PURE__ */ jsx24(
       IconButton8,
       {
         onClick: handleClick,
@@ -2803,7 +2869,7 @@ var HeaderMenu = ({
             color: (theme) => theme.palette.primary.main
           }
         },
-        children: /* @__PURE__ */ jsx23(MoreVertIcon, { fontSize: "small" })
+        children: /* @__PURE__ */ jsx24(MoreVertIcon, { fontSize: "small" })
       }
     ) }),
     /* @__PURE__ */ jsxs15(
@@ -2823,7 +2889,7 @@ var HeaderMenu = ({
         onClick: (e) => e.stopPropagation(),
         children: [
           /* @__PURE__ */ jsxs15(MenuItem, { onClick: handleDocumentClick, children: [
-            /* @__PURE__ */ jsx23(
+            /* @__PURE__ */ jsx24(
               DocumentsMenu,
               {
                 allAttachments,
@@ -2831,10 +2897,10 @@ var HeaderMenu = ({
                 onClose: handleDocumentClose
               }
             ),
-            /* @__PURE__ */ jsx23(Typography12, { variant: "body2", children: "Documents" })
+            /* @__PURE__ */ jsx24(Typography12, { variant: "body2", children: "Documents" })
           ] }),
           /* @__PURE__ */ jsxs15(MenuItem, { onClick: handleParticipantsClick, children: [
-            /* @__PURE__ */ jsx23(
+            /* @__PURE__ */ jsx24(
               ParticipantsMenu,
               {
                 participants,
@@ -2843,7 +2909,7 @@ var HeaderMenu = ({
                 onClose: handleParticipantsClose
               }
             ),
-            /* @__PURE__ */ jsx23(Typography12, { variant: "body2", children: "Participants" })
+            /* @__PURE__ */ jsx24(Typography12, { variant: "body2", children: "Participants" })
           ] })
         ]
       }
@@ -2853,9 +2919,9 @@ var HeaderMenu = ({
 
 // src/client/components/ChatPopup/components/Header/index.tsx
 import OpenInFull from "@mui/icons-material/OpenInFull";
-import { styled as styled11 } from "@mui/material/styles";
-import { Fragment as Fragment6, jsx as jsx24, jsxs as jsxs16 } from "react/jsx-runtime";
-var HeaderContainer = styled11(Box26)(({ theme }) => ({
+import { styled as styled12 } from "@mui/material/styles";
+import { Fragment as Fragment6, jsx as jsx25, jsxs as jsxs16 } from "react/jsx-runtime";
+var HeaderContainer = styled12(Box27)(({ theme }) => ({
   padding: theme.spacing(1.5),
   borderBottom: `1px solid ${theme.palette.divider}`,
   background: theme.palette.background.paper,
@@ -2866,12 +2932,12 @@ var HeaderContainer = styled11(Box26)(({ theme }) => ({
   borderTopLeftRadius: "16px",
   borderTopRightRadius: "16px"
 }));
-var UserInfo = styled11(Box26)(({ theme }) => ({
+var UserInfo = styled12(Box27)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   gap: theme.spacing(1)
 }));
-var UserAvatar2 = styled11(Box26)(({ theme }) => ({
+var UserAvatar2 = styled12(Box27)(({ theme }) => ({
   width: 32,
   height: 32,
   borderRadius: "50%",
@@ -2889,13 +2955,13 @@ var UserAvatar2 = styled11(Box26)(({ theme }) => ({
     objectFit: "cover"
   }
 }));
-var UserName = styled11(Typography13)(({ theme }) => ({
+var UserName = styled12(Typography13)(({ theme }) => ({
   fontSize: "0.9rem",
   fontWeight: 600,
   margin: 0,
   lineHeight: 1.2
 }));
-var ActionButton = styled11(IconButton9)(({ theme }) => ({
+var ActionButton = styled12(IconButton9)(({ theme }) => ({
   color: theme.palette.text.secondary,
   padding: 0.5,
   "&:hover": {
@@ -2913,14 +2979,14 @@ var Header = ({
   allAttachments,
   conversationId
 }) => {
-  const [isDocumentsOpen, setIsDocumentsOpen] = useState9(false);
-  const [isParticipantsOpen, setIsParticipantsOpen] = useState9(false);
+  const [isDocumentsOpen, setIsDocumentsOpen] = useState10(false);
+  const [isParticipantsOpen, setIsParticipantsOpen] = useState10(false);
   const handleDocumentClose = () => setIsDocumentsOpen(false);
   const handleParticipantsClose = () => setIsParticipantsOpen(false);
   const renderActionButtons = () => {
     if (isExpanded && conversationId) {
       return /* @__PURE__ */ jsxs16(Fragment6, { children: [
-        /* @__PURE__ */ jsx24(ActionButton, { size: "small", onClick: () => setIsDocumentsOpen(true), children: /* @__PURE__ */ jsx24(
+        /* @__PURE__ */ jsx25(ActionButton, { size: "small", onClick: () => setIsDocumentsOpen(true), children: /* @__PURE__ */ jsx25(
           DocumentsMenu,
           {
             allAttachments,
@@ -2928,12 +2994,12 @@ var Header = ({
             onClose: handleDocumentClose
           }
         ) }),
-        /* @__PURE__ */ jsx24(
+        /* @__PURE__ */ jsx25(
           ActionButton,
           {
             size: "small",
             onClick: () => setIsParticipantsOpen(true),
-            children: /* @__PURE__ */ jsx24(
+            children: /* @__PURE__ */ jsx25(
               ParticipantsMenu,
               {
                 participants,
@@ -2947,7 +3013,7 @@ var Header = ({
       ] });
     }
     if (conversationId) {
-      return /* @__PURE__ */ jsx24(
+      return /* @__PURE__ */ jsx25(
         HeaderMenu,
         {
           allAttachments,
@@ -2960,12 +3026,12 @@ var Header = ({
   };
   return /* @__PURE__ */ jsxs16(HeaderContainer, { children: [
     /* @__PURE__ */ jsxs16(UserInfo, { children: [
-      avatar && /* @__PURE__ */ jsx24(UserAvatar2, { children: /* @__PURE__ */ jsx24("img", { src: avatar, alt: "title" }) }),
-      /* @__PURE__ */ jsx24(Box26, { children: /* @__PURE__ */ jsx24(UserName, { variant: "subtitle1", children: title }) })
+      avatar && /* @__PURE__ */ jsx25(UserAvatar2, { children: /* @__PURE__ */ jsx25("img", { src: avatar, alt: "title" }) }),
+      /* @__PURE__ */ jsx25(Box27, { children: /* @__PURE__ */ jsx25(UserName, { variant: "subtitle1", children: title }) })
     ] }),
-    /* @__PURE__ */ jsxs16(Box26, { sx: { display: "flex", gap: 1 }, children: [
+    /* @__PURE__ */ jsxs16(Box27, { sx: { display: "flex", gap: 1 }, children: [
       renderActionButtons(),
-      onExpand && /* @__PURE__ */ jsx24(
+      onExpand && /* @__PURE__ */ jsx25(
         ActionButton,
         {
           onClick: onExpand,
@@ -2973,10 +3039,10 @@ var Header = ({
           sx: {
             transform: isExpanded ? "rotate(180deg)" : "none"
           },
-          children: isExpanded ? /* @__PURE__ */ jsx24(CloseFullscreen, { fontSize: "small" }) : /* @__PURE__ */ jsx24(OpenInFull, { fontSize: "small" })
+          children: isExpanded ? /* @__PURE__ */ jsx25(CloseFullscreen, { fontSize: "small" }) : /* @__PURE__ */ jsx25(OpenInFull, { fontSize: "small" })
         }
       ),
-      /* @__PURE__ */ jsx24(ActionButton, { onClick: onClose, size: "small", children: /* @__PURE__ */ jsx24(Close, { fontSize: "small" }) })
+      /* @__PURE__ */ jsx25(ActionButton, { onClick: onClose, size: "small", children: /* @__PURE__ */ jsx25(Close, { fontSize: "small" }) })
     ] })
   ] });
 };
@@ -2984,8 +3050,8 @@ var Header_default = Header;
 
 // src/client/components/ChatPopup/style.ts
 import { Paper } from "@mui/material";
-import { styled as styled12 } from "@mui/material/styles";
-var StyledPaper = styled12(Paper, {
+import { styled as styled13 } from "@mui/material/styles";
+var StyledPaper = styled13(Paper, {
   shouldForwardProp: (prop) => prop !== "isClosing" && prop !== "isExpanded"
 })(
   ({ theme, isClosing, isExpanded }) => ({
@@ -3034,7 +3100,7 @@ var StyledPaper = styled12(Paper, {
 );
 
 // src/client/components/ChatPopup/index.tsx
-import { jsx as jsx25, jsxs as jsxs17 } from "react/jsx-runtime";
+import { jsx as jsx26, jsxs as jsxs17 } from "react/jsx-runtime";
 var ChatPopup = ({
   open,
   onClose,
@@ -3056,7 +3122,7 @@ var ChatPopup = ({
 }) => {
   const [isClosing, setIsClosing] = React13.useState(false);
   const [isExpanded, setIsExpanded] = React13.useState(false);
-  useEffect7(() => {
+  useEffect8(() => {
     if (!open) {
       setIsClosing(true);
       const timer = setTimeout(() => {
@@ -3076,7 +3142,7 @@ var ChatPopup = ({
         pointerEvents: !open && !isClosing ? "none" : "auto"
       },
       children: [
-        /* @__PURE__ */ jsx25(
+        /* @__PURE__ */ jsx26(
           Header_default,
           {
             title,
@@ -3095,7 +3161,7 @@ var ChatPopup = ({
             renderParticipant
           }
         ),
-        /* @__PURE__ */ jsx25(
+        /* @__PURE__ */ jsx26(
           Chat,
           {
             config,
@@ -3121,8 +3187,8 @@ import { Zoom, useTheme } from "@mui/material";
 
 // src/client/components/FloatingButton/styles.ts
 import { Fab } from "@mui/material";
-import { styled as styled13 } from "@mui/material/styles";
-var StyledFab = styled13(Fab)(({ theme }) => ({
+import { styled as styled14 } from "@mui/material/styles";
+var StyledFab = styled14(Fab)(({ theme }) => ({
   position: "fixed",
   bottom: theme.spacing(4),
   right: theme.spacing(4),
@@ -3130,7 +3196,7 @@ var StyledFab = styled13(Fab)(({ theme }) => ({
 }));
 
 // src/client/components/FloatingButton/index.tsx
-import { jsx as jsx26 } from "react/jsx-runtime";
+import { jsx as jsx27 } from "react/jsx-runtime";
 var FloatingButton = ({
   icon,
   onClick,
@@ -3140,7 +3206,7 @@ var FloatingButton = ({
   tooltip
 }) => {
   const theme = useTheme();
-  return /* @__PURE__ */ jsx26(
+  return /* @__PURE__ */ jsx27(
     Zoom,
     {
       in: true,
@@ -3152,7 +3218,7 @@ var FloatingButton = ({
         transitionDelay: "0ms"
       },
       unmountOnExit: true,
-      children: /* @__PURE__ */ jsx26(
+      children: /* @__PURE__ */ jsx27(
         StyledFab,
         {
           onClick,
@@ -3168,7 +3234,7 @@ var FloatingButton = ({
 };
 
 // src/client/components/ChatBubble/index.tsx
-import { Fragment as Fragment7, jsx as jsx27, jsxs as jsxs18 } from "react/jsx-runtime";
+import { Fragment as Fragment7, jsx as jsx28, jsxs as jsxs18 } from "react/jsx-runtime";
 var ChatBubble = ({
   onClick,
   unreadCount = 0,
@@ -3188,14 +3254,14 @@ var ChatBubble = ({
   totalMessages,
   buttonJoin
 }) => {
-  const [isOpen, setIsOpen] = useState10(false);
+  const [isOpen, setIsOpen] = useState11(false);
   const handleClick = () => {
     setIsOpen(!isOpen);
     onClick == null ? void 0 : onClick();
   };
-  const icon = unreadCount > 0 ? /* @__PURE__ */ jsx27(Badge, { badgeContent: unreadCount, color: "error", max: 99, children: /* @__PURE__ */ jsx27(ChatIcon, {}) }) : /* @__PURE__ */ jsx27(ChatIcon, {});
+  const icon = unreadCount > 0 ? /* @__PURE__ */ jsx28(Badge, { badgeContent: unreadCount, color: "error", max: 99, children: /* @__PURE__ */ jsx28(ChatIcon, {}) }) : /* @__PURE__ */ jsx28(ChatIcon, {});
   return /* @__PURE__ */ jsxs18(Fragment7, { children: [
-    /* @__PURE__ */ jsx27(
+    /* @__PURE__ */ jsx28(
       FloatingButton,
       {
         icon,
@@ -3209,7 +3275,7 @@ var ChatBubble = ({
         }
       }
     ),
-    /* @__PURE__ */ jsx27(
+    /* @__PURE__ */ jsx28(
       ChatPopup,
       {
         participants,

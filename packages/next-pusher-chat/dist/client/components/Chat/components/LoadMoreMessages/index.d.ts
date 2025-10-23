@@ -1,1 +1,2 @@
-export declare const LoadMoreMessages: () => import("react/jsx-runtime").JSX.Element | null;
+declare const LoadMoreMessages: () => import("react/jsx-runtime").JSX.Element | null;
+export default LoadMoreMessages;

@@ -11,10 +11,11 @@ import React, { useEffect, useRef, useState } from "react";
 
 // import { ChatActions } from "./components/ChatActions";
 import { ChatProps } from "../../types/chat";
-import { LoadMoreMessages } from "./components/LoadMoreMessages";
+import LoadMoreMessages from "./components/LoadMoreMessages";
 import MessageInput from "./components/MessageInput";
 import { MessageList } from "./components/MessageList";
 import { TypingIndicator } from "./components/TypingIndicator";
+import { ChatActions } from "./components/ChatActions";
 
 const ChatConversationContent: React.FC = () => {
   const { scrollManager } = useChatContext();
@@ -27,7 +28,7 @@ const ChatConversationContent: React.FC = () => {
 
         <MessageList />
       </Content>
-      {/* <ChatActions /> */}
+      <ChatActions />
       <TypingIndicator />
       <MessageInput />
     </>

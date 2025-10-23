@@ -1,15 +1,16 @@
 "use client";
 import { Box, IconButton } from "@mui/material";
 import { useRef, useState } from "react";
+import { Paperclip } from "lucide-react";
 
-import AttachFileIcon from "@mui/icons-material/AttachFile";
+// import AttachFileIcon from "@mui/icons-material/AttachFile";
 
 interface FilePickerProps {
   onFilesSelect: (attachments: File[]) => void;
   disabled?: boolean;
 }
 
-export function FilePicker({
+export default function  FilePicker({
   onFilesSelect,
   disabled = false,
 }: FilePickerProps) {
@@ -55,7 +56,7 @@ export function FilePicker({
         }}
         disabled={disabled}
       >
-        <AttachFileIcon />
+        <Paperclip size={20} />
       </IconButton>
     </Box>
   );
